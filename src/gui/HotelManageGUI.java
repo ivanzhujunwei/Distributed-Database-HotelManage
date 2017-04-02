@@ -30,7 +30,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
 
     Object columnHeaders_hotel[] = {"Hote id", "name", "Type", "Country", "City"};
     Object columnHeaders_room[] = {"ROOM_NUMBER", "HOTEL_ID", "TYPE", "PRICE"};
-    Object columnHeaders_guest[] = {"ROOM_NUMBER", "HOTEL_ID", "TYPE", "PRICE"};
+    Object columnHeaders_guest[] = {"GUEST_NUM", "TITLE", "FIRST_NAME", "LAST_NAME","DOB"};
     Object data[][] = {};
     DefaultTableModel dtmHotel = new DefaultTableModel(data, columnHeaders_hotel);
     DefaultTableModel dtmRoom = new DefaultTableModel(data, columnHeaders_room);
@@ -103,14 +103,107 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         roomDesField = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         roomOccupancyField = new javax.swing.JTextField();
-
         updateRoomBtn = new javax.swing.JButton();
-
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         guestTable = new javax.swing.JTable();
         showAllGuests = new javax.swing.JButton();
-
+        addGuestBtn = new javax.swing.JButton();
+        updateGuestBtn = new javax.swing.JButton();
+        deleteGuestBtn = new javax.swing.JButton();
+        findByNameBtn = new javax.swing.JButton();
+        findByGuestNameField = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        guestNameField = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        guestTitleField = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        guestFirstnameField = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        guestLastnameField = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        guestDOBField = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        guestEmailField = new javax.swing.JTextField();
+        guestPhoneField = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        guestCountryField = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        guestCityField = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        guestStreetField = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        guestPostcodeField = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        customerTable = new javax.swing.JTable();
+        showAllCustomerBtn = new javax.swing.JButton();
+        findByMemBtn = new javax.swing.JButton();
+        deleteCustomerBtn = new javax.swing.JButton();
+        updateCustomerBtn = new javax.swing.JButton();
+        addCustomerBtn = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel24 = new javax.swing.JLabel();
+        custNameField = new javax.swing.JTextField();
+        custTitleField = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        custFirstnameField = new javax.swing.JTextField();
+        custLastnameField = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        custDOBField = new javax.swing.JTextField();
+        custEmailField = new javax.swing.JTextField();
+        custPhoneField = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        custCityField = new javax.swing.JTextField();
+        custStreetField = new javax.swing.JTextField();
+        custPostcodeField = new javax.swing.JTextField();
+        custCountryField = new javax.swing.JTextField();
+        jLabel35 = new javax.swing.JLabel();
+        custMemCombo = new javax.swing.JComboBox<>();
+        jLabel36 = new javax.swing.JLabel();
+        custCreditField = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        membershipTable = new javax.swing.JTable();
+        showAllMemBtn = new javax.swing.JButton();
+        addMemBtn = new javax.swing.JButton();
+        updateMemBtn = new javax.swing.JButton();
+        deleteMemBtn = new javax.swing.JButton();
+        jLabel37 = new javax.swing.JLabel();
+        memTierField = new javax.swing.JTextField();
+        tierCreditField = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        discountField = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
+        rewardField = new javax.swing.JTextField();
+        jLabel40 = new javax.swing.JLabel();
+        availableCreditField = new javax.swing.JTextField();
+        searchMemByCreditBtn = new javax.swing.JButton();
+        creditKindCombo = new javax.swing.JComboBox<>();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        bookingTable = new javax.swing.JTable();
+        jLabel41 = new javax.swing.JLabel();
+        showBookingBtn = new javax.swing.JButton();
+        updateBookingBtn = new javax.swing.JButton();
+        cancelBookingBtn = new javax.swing.JButton();
+        findBookingByCustNameField = new javax.swing.JTextField();
+        findBookByCustNameField = new javax.swing.JButton();
+        bookingIdField = new javax.swing.JTextField();
+        jLabel42 = new javax.swing.JLabel();
+        bookedCustNameField = new javax.swing.JTextField();
+        bookedRomNOField = new javax.swing.JTextField();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        bookedRomNOField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -193,7 +286,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -285,7 +378,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(constructYearLabel)
                         .addComponent(constructYearFormatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Hotel", jPanel1);
@@ -330,8 +423,10 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jLabel12.setText("Room Occupancy");
 
         updateRoomBtn.setText("Update");
-        updateRoomBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        updateRoomBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 updateRoomBtnActionPerformed(evt);
             }
         });
@@ -344,7 +439,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(roomDesField)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(showAllRoomBtn)
@@ -427,6 +522,64 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             }
         });
 
+        addGuestBtn.setText("Add");
+        addGuestBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                addGuestBtnActionPerformed(evt);
+            }
+        });
+
+        updateGuestBtn.setText("Update");
+        updateGuestBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                updateGuestBtnActionPerformed(evt);
+            }
+        });
+
+        deleteGuestBtn.setText("Delete");
+        deleteGuestBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                deleteGuestBtnActionPerformed(evt);
+            }
+        });
+
+        findByNameBtn.setText("Find by name");
+        findByNameBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                findByNameBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("Guest number");
+
+        jLabel14.setText("Title");
+
+        jLabel15.setText("First name");
+
+        jLabel16.setText("Last name");
+
+        jLabel17.setText("DOB");
+
+        jLabel18.setText("Email");
+
+        jLabel19.setText("Phone");
+
+        jLabel20.setText("Country");
+
+        jLabel21.setText("City");
+
+        jLabel22.setText("Street");
+
+        jLabel23.setText("Postcode");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -434,23 +587,649 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(showAllGuests)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(showAllGuests)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel19))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(guestPhoneField, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(guestFirstnameField)
+                                        .addComponent(guestTitleField, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(guestNameField, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addComponent(addGuestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                            .addComponent(updateGuestBtn)))
+                                    .addComponent(guestLastnameField)
+                                    .addComponent(guestDOBField)
+                                    .addComponent(guestEmailField))))
+                        .addGap(11, 11, 11)
+                        .addComponent(deleteGuestBtn)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel23)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(guestPostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel22)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(guestStreetField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel21)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(guestCityField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel20)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(guestCountryField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(90, 90, 90))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(findByGuestNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(findByNameBtn)
+                                .addGap(0, 231, Short.MAX_VALUE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(showAllGuests)
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showAllGuests)
+                    .addComponent(addGuestBtn)
+                    .addComponent(updateGuestBtn)
+                    .addComponent(deleteGuestBtn)
+                    .addComponent(findByNameBtn)
+                    .addComponent(findByGuestNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(guestNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(guestCountryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(guestTitleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel21)
+                        .addComponent(guestCityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(guestFirstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(guestStreetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(guestLastnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(guestDOBField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel18)
+                                .addGap(8, 8, 8))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(guestEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(guestPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(guestPostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel23))))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Guest", jPanel3);
+
+        customerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String []
+            {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(customerTable);
+
+        showAllCustomerBtn.setText("Show all");
+        showAllCustomerBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                showAllCustomerBtnActionPerformed(evt);
+            }
+        });
+
+        findByMemBtn.setText("Find by membership");
+        findByMemBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                findByMemBtnActionPerformed(evt);
+            }
+        });
+
+        deleteCustomerBtn.setText("Delete");
+        deleteCustomerBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                deleteCustomerBtnActionPerformed(evt);
+            }
+        });
+
+        updateCustomerBtn.setText("Update");
+        updateCustomerBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                updateCustomerBtnActionPerformed(evt);
+            }
+        });
+
+        addCustomerBtn.setText("Add ");
+        addCustomerBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                addCustomerBtnActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel24.setText("Customer number");
+
+        jLabel25.setText("Title");
+
+        jLabel26.setText("First name");
+
+        jLabel27.setText("Last name");
+
+        jLabel28.setText("DOB");
+
+        jLabel29.setText("Phone");
+
+        jLabel30.setText("Email");
+
+        jLabel31.setText("Postcode");
+
+        jLabel32.setText("Street");
+
+        jLabel33.setText("City");
+
+        jLabel34.setText("Country");
+
+        jLabel35.setText("Mem tier");
+
+        custMemCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel36.setText("Credit");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4)
+                        .addContainerGap())
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(showAllCustomerBtn)
+                                .addGap(31, 31, 31)
+                                .addComponent(addCustomerBtn)
+                                .addGap(34, 34, 34)
+                                .addComponent(updateCustomerBtn)
+                                .addGap(34, 34, 34)
+                                .addComponent(deleteCustomerBtn))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel28)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel24)
+                                            .addComponent(jLabel25)
+                                            .addComponent(jLabel26)
+                                            .addComponent(jLabel27)
+                                            .addComponent(jLabel29))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(custPhoneField)
+                                            .addComponent(custFirstnameField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(custTitleField)
+                                            .addComponent(custNameField)
+                                            .addComponent(custLastnameField)
+                                            .addComponent(custDOBField)
+                                            .addComponent(custEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel30))))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel32)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(custStreetField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel33)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(custCityField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel34)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(custCountryField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(findByMemBtn))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel31)
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(custPostcodeField, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                    .addComponent(custMemCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(custCreditField))))
+                        .addGap(0, 129, Short.MAX_VALUE))))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showAllCustomerBtn)
+                    .addComponent(addCustomerBtn)
+                    .addComponent(updateCustomerBtn)
+                    .addComponent(deleteCustomerBtn)
+                    .addComponent(findByMemBtn)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(custNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(custTitleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
+                            .addComponent(custFirstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel27)
+                            .addComponent(custLastnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel34)
+                            .addComponent(custCountryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel33)
+                            .addComponent(custCityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(custStreetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel32))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(custPostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel31))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel28)
+                        .addComponent(custDOBField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel35)
+                        .addComponent(custMemCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel30)
+                                .addGap(8, 8, 8))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(custEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel36))))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel29)
+                            .addComponent(custPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(custCreditField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Customer", jPanel4);
+
+        membershipTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String []
+            {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(membershipTable);
+
+        showAllMemBtn.setText("Show all");
+        showAllMemBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                showAllMemBtnActionPerformed(evt);
+            }
+        });
+
+        addMemBtn.setText("Add ");
+        addMemBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                addMemBtnActionPerformed(evt);
+            }
+        });
+
+        updateMemBtn.setText("Update");
+        updateMemBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                updateMemBtnActionPerformed(evt);
+            }
+        });
+
+        deleteMemBtn.setText("Delete");
+        deleteMemBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                deleteMemBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel37.setText("Membership tier");
+
+        jLabel38.setText("Tier credit");
+
+        jLabel39.setText("Discount");
+
+        jLabel40.setText("Reward");
+
+        searchMemByCreditBtn.setText("Find membership by credit");
+        searchMemByCreditBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                searchMemByCreditBtnActionPerformed(evt);
+            }
+        });
+
+        creditKindCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ">=", "<=" }));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel38)
+                                    .addComponent(jLabel39)
+                                    .addComponent(jLabel40))
+                                .addGap(69, 69, 69)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(discountField, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tierCreditField, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rewardField, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(showAllMemBtn)
+                                    .addComponent(jLabel37, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(31, 31, 31)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(addMemBtn)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(updateMemBtn)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(deleteMemBtn))
+                                    .addComponent(memTierField))
+                                .addGap(18, 18, 18)
+                                .addComponent(creditKindCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(availableCreditField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(searchMemByCreditBtn)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showAllMemBtn)
+                    .addComponent(addMemBtn)
+                    .addComponent(updateMemBtn)
+                    .addComponent(deleteMemBtn)
+                    .addComponent(availableCreditField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchMemByCreditBtn)
+                    .addComponent(creditKindCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel37)
+                    .addComponent(memTierField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tierCreditField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel38))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel39)
+                    .addComponent(discountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel40)
+                    .addComponent(rewardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(108, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Membership", jPanel5);
+
+        bookingTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String []
+            {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(bookingTable);
+
+        jLabel41.setText("Booking id");
+
+        showBookingBtn.setText("Show all");
+        showBookingBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                showBookingBtnActionPerformed(evt);
+            }
+        });
+
+        updateBookingBtn.setText("Update");
+        updateBookingBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                updateBookingBtnActionPerformed(evt);
+            }
+        });
+
+        cancelBookingBtn.setText("Cancel");
+        cancelBookingBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cancelBookingBtnActionPerformed(evt);
+            }
+        });
+
+        findBookByCustNameField.setText("Find by customer name");
+        findBookByCustNameField.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                findBookByCustNameFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel42.setText("Customer name");
+
+        jLabel43.setText("Room number");
+
+        jLabel44.setText("Room number");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(showBookingBtn)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel41)))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(updateBookingBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelBookingBtn)
+                        .addGap(31, 31, 31)
+                        .addComponent(findBookingByCustNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(findBookByCustNameField))
+                    .addComponent(bookingIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bookedCustNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 211, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel42)
+                            .addComponent(jLabel43)
+                            .addComponent(jLabel44)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(109, 109, 109)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bookedRomNOField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bookedRomNOField1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showBookingBtn)
+                    .addComponent(updateBookingBtn)
+                    .addComponent(cancelBookingBtn)
+                    .addComponent(findBookingByCustNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(findBookByCustNameField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bookingIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel41, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel42)
+                    .addComponent(bookedCustNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel43)
+                    .addComponent(bookedRomNOField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel44)
+                    .addComponent(bookedRomNOField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(141, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Booking", jPanel6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -458,7 +1237,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -601,6 +1380,96 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         // TODO add your handling code here:
     }//GEN-LAST:event_showAllGuestsActionPerformed
 
+    private void addGuestBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addGuestBtnActionPerformed
+    {//GEN-HEADEREND:event_addGuestBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addGuestBtnActionPerformed
+
+    private void updateGuestBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_updateGuestBtnActionPerformed
+    {//GEN-HEADEREND:event_updateGuestBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateGuestBtnActionPerformed
+
+    private void deleteGuestBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteGuestBtnActionPerformed
+    {//GEN-HEADEREND:event_deleteGuestBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteGuestBtnActionPerformed
+
+    private void findByNameBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_findByNameBtnActionPerformed
+    {//GEN-HEADEREND:event_findByNameBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_findByNameBtnActionPerformed
+
+    private void showAllCustomerBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showAllCustomerBtnActionPerformed
+    {//GEN-HEADEREND:event_showAllCustomerBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showAllCustomerBtnActionPerformed
+
+    private void addCustomerBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addCustomerBtnActionPerformed
+    {//GEN-HEADEREND:event_addCustomerBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addCustomerBtnActionPerformed
+
+    private void updateCustomerBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_updateCustomerBtnActionPerformed
+    {//GEN-HEADEREND:event_updateCustomerBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateCustomerBtnActionPerformed
+
+    private void deleteCustomerBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteCustomerBtnActionPerformed
+    {//GEN-HEADEREND:event_deleteCustomerBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteCustomerBtnActionPerformed
+
+    private void findByMemBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_findByMemBtnActionPerformed
+    {//GEN-HEADEREND:event_findByMemBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_findByMemBtnActionPerformed
+
+    private void showAllMemBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showAllMemBtnActionPerformed
+    {//GEN-HEADEREND:event_showAllMemBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showAllMemBtnActionPerformed
+
+    private void addMemBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addMemBtnActionPerformed
+    {//GEN-HEADEREND:event_addMemBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addMemBtnActionPerformed
+
+    private void updateMemBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_updateMemBtnActionPerformed
+    {//GEN-HEADEREND:event_updateMemBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateMemBtnActionPerformed
+
+    private void deleteMemBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteMemBtnActionPerformed
+    {//GEN-HEADEREND:event_deleteMemBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteMemBtnActionPerformed
+
+    private void searchMemByCreditBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchMemByCreditBtnActionPerformed
+    {//GEN-HEADEREND:event_searchMemByCreditBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchMemByCreditBtnActionPerformed
+
+    private void showBookingBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showBookingBtnActionPerformed
+    {//GEN-HEADEREND:event_showBookingBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showBookingBtnActionPerformed
+
+    private void updateBookingBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_updateBookingBtnActionPerformed
+    {//GEN-HEADEREND:event_updateBookingBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateBookingBtnActionPerformed
+
+    private void cancelBookingBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelBookingBtnActionPerformed
+    {//GEN-HEADEREND:event_cancelBookingBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelBookingBtnActionPerformed
+
+    private void findBookByCustNameFieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_findBookByCustNameFieldActionPerformed
+    {//GEN-HEADEREND:event_findBookByCustNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_findBookByCustNameFieldActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -644,17 +1513,62 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addCustomerBtn;
+    private javax.swing.JButton addGuestBtn;
     private javax.swing.JButton addHotelBtn;
+    private javax.swing.JButton addMemBtn;
     private javax.swing.JButton addRoomBtn;
     private javax.swing.JTextField addressField;
+    private javax.swing.JTextField availableCreditField;
+    private javax.swing.JTextField bookedCustNameField;
+    private javax.swing.JTextField bookedRomNOField;
+    private javax.swing.JTextField bookedRomNOField1;
+    private javax.swing.JTextField bookingIdField;
+    private javax.swing.JTable bookingTable;
+    private javax.swing.JButton cancelBookingBtn;
     private javax.swing.JTextField cityField;
     private javax.swing.JFormattedTextField constructYearFormatField;
     private javax.swing.JLabel constructYearLabel;
     private javax.swing.JTextField countryField;
+    private javax.swing.JComboBox<String> creditKindCombo;
+    private javax.swing.JTextField custCityField;
+    private javax.swing.JTextField custCountryField;
+    private javax.swing.JTextField custCreditField;
+    private javax.swing.JTextField custDOBField;
+    private javax.swing.JTextField custEmailField;
+    private javax.swing.JTextField custFirstnameField;
+    private javax.swing.JTextField custLastnameField;
+    private javax.swing.JComboBox<String> custMemCombo;
+    private javax.swing.JTextField custNameField;
+    private javax.swing.JTextField custPhoneField;
+    private javax.swing.JTextField custPostcodeField;
+    private javax.swing.JTextField custStreetField;
+    private javax.swing.JTextField custTitleField;
+    private javax.swing.JTable customerTable;
     private javax.swing.JButton deleteBtn;
+    private javax.swing.JButton deleteCustomerBtn;
+    private javax.swing.JButton deleteGuestBtn;
+    private javax.swing.JButton deleteMemBtn;
+    private javax.swing.JTextField discountField;
     private javax.swing.JTextField emailField;
+    private javax.swing.JButton findBookByCustNameField;
+    private javax.swing.JTextField findBookingByCustNameField;
+    private javax.swing.JTextField findByGuestNameField;
+    private javax.swing.JButton findByMemBtn;
+    private javax.swing.JButton findByNameBtn;
     private javax.swing.JButton findByTypeBtn;
+    private javax.swing.JTextField guestCityField;
+    private javax.swing.JTextField guestCountryField;
+    private javax.swing.JTextField guestDOBField;
+    private javax.swing.JTextField guestEmailField;
+    private javax.swing.JTextField guestFirstnameField;
+    private javax.swing.JTextField guestLastnameField;
+    private javax.swing.JTextField guestNameField;
+    private javax.swing.JTextField guestPhoneField;
+    private javax.swing.JTextField guestPostcodeField;
+    private javax.swing.JTextField guestStreetField;
     private javax.swing.JTable guestTable;
+    private javax.swing.JTextField guestTitleField;
     private javax.swing.JTextField hotelIdField;
     private javax.swing.JLabel hotelIdLabel;
     private javax.swing.JComboBox<String> hotelNameCombox;
@@ -662,13 +1576,46 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JLabel hotelNameLabel;
     private javax.swing.JTable hotelTable;
     private javax.swing.JComboBox<String> hotelTypeCombox;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -677,11 +1624,20 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField memTierField;
+    private javax.swing.JTable membershipTable;
     private javax.swing.JTextField phoneField;
+    private javax.swing.JTextField rewardField;
     private javax.swing.JTextField roomDesField;
     private javax.swing.JTextField roomIdField;
     private javax.swing.JTextField roomOccupancyField;
@@ -689,10 +1645,19 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JTable roomTable;
     private javax.swing.JComboBox<String> roomTypeCombox;
     private javax.swing.JComboBox<String> searchByTypeCom;
+    private javax.swing.JButton searchMemByCreditBtn;
+    private javax.swing.JButton showAllCustomerBtn;
     private javax.swing.JButton showAllGuests;
     private javax.swing.JButton showAllHotels;
+    private javax.swing.JButton showAllMemBtn;
     private javax.swing.JButton showAllRoomBtn;
+    private javax.swing.JButton showBookingBtn;
+    private javax.swing.JTextField tierCreditField;
+    private javax.swing.JButton updateBookingBtn;
+    private javax.swing.JButton updateCustomerBtn;
+    private javax.swing.JButton updateGuestBtn;
     private javax.swing.JButton updateHotelBtn;
+    private javax.swing.JButton updateMemBtn;
     private javax.swing.JButton updateRoomBtn;
     // End of variables declaration//GEN-END:variables
 

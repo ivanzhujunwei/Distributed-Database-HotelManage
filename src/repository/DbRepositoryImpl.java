@@ -102,7 +102,27 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public void addRoom(Room room)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            stmt = connB.createStatement();
+            String sql = "INSERT INTO ROOM VALUES("
+                    + room.getRm_num()+ ","
+                    + room.getHotel().getHotelId()+ ",'"
+                    + room.getRm_type() + "',"
+                    + room.getRm_price()+ ",'"
+                    + room.getRm_des() + "',"
+                    + room.getRm_occupancy()+")";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override
@@ -182,7 +202,29 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public Room getRoomById(int roomid)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Room room = new Room();
+        try {
+            stmt = connB.createStatement();
+            ResultSet rset = stmt.executeQuery("SELECT * FROM Room WHERE rm_num = " + roomid);
+            while (rset.next()) {
+                room.setRm_num(roomid);
+                room.setRm_type(rset.getString("rm_type"));
+                room.setRm_price(rset.getDouble("rm_price"));
+                room.setRm_des(rset.getString("rm_des"));
+                Hotel hotel = getHotelById(rset.getInt("ht_id"));
+                room.setHotel(hotel);
+            }
+            rset.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return room;
     }
 
     @Override
@@ -213,7 +255,8 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public boolean isRoomExisted(int roomId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Room room = getRoomById(roomId);
+        return room.getRm_num() != 0;    
     }
 
     @Override

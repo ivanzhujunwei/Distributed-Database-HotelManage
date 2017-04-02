@@ -51,8 +51,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -85,7 +84,14 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         roomTable = new javax.swing.JTable();
-        showAllRooms = new javax.swing.JButton();
+        showAllRoomBtn = new javax.swing.JButton();
+        addRoomBtn = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        roomIdField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        hotelNameCombox = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        roomTypeCombox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,37 +99,29 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jScrollPane1.setViewportView(hotelTable);
 
         showAllHotels.setText("Show All");
-        showAllHotels.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        showAllHotels.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showAllHotelsActionPerformed(evt);
             }
         });
 
         addHotelBtn.setText("Add");
-        addHotelBtn.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        addHotelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addHotelBtnActionPerformed(evt);
             }
         });
 
         updateHotelBtn.setText("Update");
-        updateHotelBtn.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        updateHotelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateHotelBtnActionPerformed(evt);
             }
         });
 
         deleteBtn.setText("Delete");
-        deleteBtn.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
             }
         });
@@ -131,10 +129,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         searchByTypeCom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 star", "4 star", "3 star", "2 star" }));
 
         findByTypeBtn.setText("FindByType");
-        findByTypeBtn.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        findByTypeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 findByTypeBtnActionPerformed(evt);
             }
         });
@@ -265,17 +261,34 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
 
         jTabbedPane1.addTab("Hotel", jPanel1);
 
+        jPanel2.setToolTipText("");
+
         roomTable.setModel(dtmRoom);
         jScrollPane2.setViewportView(roomTable);
 
-        showAllRooms.setText("Show All");
-        showAllRooms.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                showAllRoomsActionPerformed(evt);
+        showAllRoomBtn.setText("Show All");
+        showAllRoomBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showAllRoomBtnActionPerformed(evt);
             }
         });
+
+        addRoomBtn.setText("Add");
+        addRoomBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRoomBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Room ID");
+
+        jLabel8.setText("Hotel");
+
+        hotelNameCombox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel9.setText("Room Type");
+
+        roomTypeCombox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -284,9 +297,19 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(showAllRooms)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(showAllRoomBtn)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addRoomBtn)
+                            .addComponent(roomIdField)
+                            .addComponent(hotelNameCombox, 0, 159, Short.MAX_VALUE)
+                            .addComponent(roomTypeCombox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -295,9 +318,23 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showAllRoomBtn)
+                    .addComponent(addRoomBtn))
                 .addGap(18, 18, 18)
-                .addComponent(showAllRooms)
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(roomIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(hotelNameCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(roomTypeCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Room", jPanel2);
@@ -326,11 +363,11 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     }//GEN-LAST:event_showAllHotelsActionPerformed
 
 
-    private void showAllRoomsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showAllRoomsActionPerformed
-    {//GEN-HEADEREND:event_showAllRoomsActionPerformed
+    private void showAllRoomBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showAllRoomBtnActionPerformed
+    {//GEN-HEADEREND:event_showAllRoomBtnActionPerformed
         String sql = "SELECT * FROM ROOM";
         guiUtility.displayTable(roomTable, sql, dtmRoom);
-    }//GEN-LAST:event_showAllRoomsActionPerformed
+    }//GEN-LAST:event_showAllRoomBtnActionPerformed
 
     private void addHotelBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addHotelBtnActionPerformed
     {//GEN-HEADEREND:event_addHotelBtnActionPerformed
@@ -401,6 +438,11 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         }
     }//GEN-LAST:event_updateHotelBtnActionPerformed
 
+    private void addRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomBtnActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_addRoomBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -444,6 +486,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addHotelBtn;
+    private javax.swing.JButton addRoomBtn;
     private javax.swing.JTextField addressField;
     private javax.swing.JTextField cityField;
     private javax.swing.JFormattedTextField constructYearFormatField;
@@ -454,6 +497,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JButton findByTypeBtn;
     private javax.swing.JTextField hotelIdField;
     private javax.swing.JLabel hotelIdLabel;
+    private javax.swing.JComboBox<String> hotelNameCombox;
     private javax.swing.JTextField hotelNameField;
     private javax.swing.JLabel hotelNameLabel;
     private javax.swing.JTable hotelTable;
@@ -464,16 +508,21 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField phoneField;
+    private javax.swing.JTextField roomIdField;
     private javax.swing.JTable roomTable;
+    private javax.swing.JComboBox<String> roomTypeCombox;
     private javax.swing.JComboBox<String> searchByTypeCom;
     private javax.swing.JButton showAllHotels;
-    private javax.swing.JButton showAllRooms;
+    private javax.swing.JButton showAllRoomBtn;
     private javax.swing.JButton updateHotelBtn;
     // End of variables declaration//GEN-END:variables
 

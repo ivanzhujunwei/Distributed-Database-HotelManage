@@ -293,4 +293,22 @@ public class DbRepositoryImpl implements DbRepository
         return connB;
     }
 
+    public void updateRoom(Room room) {
+        try {
+            stmt = connB.createStatement();
+            /* update a student record using the values from JTextField txtID1 and txtName1 */
+            String sql = "UPDATE ROOM SET rm_type = '" + room.getRm_type() + "',"
+                    + "rm_price = " + room.getRm_price()+ ","
+                    + "rm_des = '" + room.getRm_des() + "',"
+                    + "occupancy = " + room.getRm_occupancy()
+                    + " WHERE rm_num = " + room.getRm_num();
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        }
+
+    }
+
 }

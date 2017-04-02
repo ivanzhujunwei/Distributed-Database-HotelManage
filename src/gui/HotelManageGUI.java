@@ -100,37 +100,6 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         roomDesField = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         roomOccupancyField = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        showAllGuestBtn = new javax.swing.JButton();
-        addGuestBtn = new javax.swing.JButton();
-        updateGuestBtn = new javax.swing.JButton();
-        deleteGuestBtn = new javax.swing.JButton();
-        findByNameField = new javax.swing.JTextField();
-        findByNameBtn = new javax.swing.JButton();
-        guestNumberLabel = new javax.swing.JLabel();
-        guestTitleField = new javax.swing.JTextField();
-        guestTitleLabel = new javax.swing.JLabel();
-        guestFirstNameLabel = new javax.swing.JLabel();
-        guestLastNameLabel = new javax.swing.JLabel();
-        guestDOBLabel = new javax.swing.JLabel();
-        guestNumField = new javax.swing.JTextField();
-        guestDOBField = new javax.swing.JTextField();
-        guestFisrtNameField = new javax.swing.JTextField();
-        guestLastNameField = new javax.swing.JTextField();
-        guestCountryLabel = new javax.swing.JLabel();
-        guestCountryField = new javax.swing.JTextField();
-        guestCityLabel = new javax.swing.JLabel();
-        guestCityField = new javax.swing.JTextField();
-        guestStreetLabel = new javax.swing.JLabel();
-        guestAddressField = new javax.swing.JTextField();
-        guestPhoneLabel = new javax.swing.JLabel();
-        guestPhoneField = new javax.swing.JTextField();
-        guestEmailLabel = new javax.swing.JLabel();
-        guestPhonelField = new javax.swing.JTextField();
-        guestPostcodeLabel = new javax.swing.JLabel();
-        guestEmailField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -213,7 +182,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1343, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -357,7 +326,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(roomDesField)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1343, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -421,85 +390,6 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         );
 
         jTabbedPane1.addTab("Room", jPanel2);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String []
-            {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable1);
-
-        jPanel3.add(jScrollPane3);
-
-        showAllGuestBtn.setText("Show all");
-        jPanel3.add(showAllGuestBtn);
-
-        addGuestBtn.setText("Add");
-        jPanel3.add(addGuestBtn);
-
-        updateGuestBtn.setText("Update");
-        jPanel3.add(updateGuestBtn);
-
-        deleteGuestBtn.setText("Delete");
-        jPanel3.add(deleteGuestBtn);
-        jPanel3.add(findByNameField);
-
-        findByNameBtn.setText("Find By Name");
-        jPanel3.add(findByNameBtn);
-
-        guestNumberLabel.setText("Guest number");
-        jPanel3.add(guestNumberLabel);
-        jPanel3.add(guestTitleField);
-
-        guestTitleLabel.setText("Title");
-        jPanel3.add(guestTitleLabel);
-
-        guestFirstNameLabel.setText("First name");
-        jPanel3.add(guestFirstNameLabel);
-
-        guestLastNameLabel.setText("Last name");
-        jPanel3.add(guestLastNameLabel);
-
-        guestDOBLabel.setText("DOB");
-        jPanel3.add(guestDOBLabel);
-        jPanel3.add(guestNumField);
-        jPanel3.add(guestDOBField);
-        jPanel3.add(guestFisrtNameField);
-        jPanel3.add(guestLastNameField);
-
-        guestCountryLabel.setText("Country");
-        jPanel3.add(guestCountryLabel);
-        jPanel3.add(guestCountryField);
-
-        guestCityLabel.setText("City");
-        jPanel3.add(guestCityLabel);
-        jPanel3.add(guestCityField);
-
-        guestStreetLabel.setText("Street");
-        jPanel3.add(guestStreetLabel);
-        jPanel3.add(guestAddressField);
-
-        guestPhoneLabel.setText("Contact phone");
-        jPanel3.add(guestPhoneLabel);
-        jPanel3.add(guestPhoneField);
-
-        guestEmailLabel.setText("Contact email");
-        jPanel3.add(guestEmailLabel);
-        jPanel3.add(guestPhonelField);
-
-        guestPostcodeLabel.setText("Postcode");
-        jPanel3.add(guestPostcodeLabel);
-        jPanel3.add(guestEmailField);
-
-        jTabbedPane1.addTab("Guest", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -665,7 +555,6 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addGuestBtn;
     private javax.swing.JButton addHotelBtn;
     private javax.swing.JButton addRoomBtn;
     private javax.swing.JTextField addressField;
@@ -674,33 +563,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JLabel constructYearLabel;
     private javax.swing.JTextField countryField;
     private javax.swing.JButton deleteBtn;
-    private javax.swing.JButton deleteGuestBtn;
     private javax.swing.JTextField emailField;
-    private javax.swing.JButton findByNameBtn;
-    private javax.swing.JTextField findByNameField;
     private javax.swing.JButton findByTypeBtn;
-    private javax.swing.JTextField guestAddressField;
-    private javax.swing.JTextField guestCityField;
-    private javax.swing.JLabel guestCityLabel;
-    private javax.swing.JTextField guestCountryField;
-    private javax.swing.JLabel guestCountryLabel;
-    private javax.swing.JTextField guestDOBField;
-    private javax.swing.JLabel guestDOBLabel;
-    private javax.swing.JTextField guestEmailField;
-    private javax.swing.JLabel guestEmailLabel;
-    private javax.swing.JLabel guestFirstNameLabel;
-    private javax.swing.JTextField guestFisrtNameField;
-    private javax.swing.JTextField guestLastNameField;
-    private javax.swing.JLabel guestLastNameLabel;
-    private javax.swing.JTextField guestNumField;
-    private javax.swing.JLabel guestNumberLabel;
-    private javax.swing.JTextField guestPhoneField;
-    private javax.swing.JLabel guestPhoneLabel;
-    private javax.swing.JTextField guestPhonelField;
-    private javax.swing.JLabel guestPostcodeLabel;
-    private javax.swing.JLabel guestStreetLabel;
-    private javax.swing.JTextField guestTitleField;
-    private javax.swing.JLabel guestTitleLabel;
     private javax.swing.JTextField hotelIdField;
     private javax.swing.JLabel hotelIdLabel;
     private javax.swing.JComboBox<String> hotelNameCombox;
@@ -722,12 +586,9 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField phoneField;
     private javax.swing.JTextField roomDesField;
     private javax.swing.JTextField roomIdField;
@@ -736,10 +597,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JTable roomTable;
     private javax.swing.JComboBox<String> roomTypeCombox;
     private javax.swing.JComboBox<String> searchByTypeCom;
-    private javax.swing.JButton showAllGuestBtn;
     private javax.swing.JButton showAllHotels;
     private javax.swing.JButton showAllRoomBtn;
-    private javax.swing.JButton updateGuestBtn;
     private javax.swing.JButton updateHotelBtn;
     // End of variables declaration//GEN-END:variables
 

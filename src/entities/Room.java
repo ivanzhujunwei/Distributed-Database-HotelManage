@@ -17,6 +17,15 @@ public class Room
     private String rm_type;
     private double rm_price;
     private String rm_des;
+    private int rm_occupancy;
+
+    public int getRm_occupancy() {
+        return rm_occupancy;
+    }
+
+    public void setRm_occupancy(int rm_occupancy) {
+        this.rm_occupancy = rm_occupancy;
+    }
 
     public int getRm_num()
     {

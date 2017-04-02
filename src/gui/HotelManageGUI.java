@@ -6,6 +6,7 @@
 package gui;
 
 import entities.Hotel;
+import entities.Room;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -31,7 +32,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     Object columnHeaders_room[] = {"ROOM_NUMBER", "HOTEL_ID", "TYPE", "PRICE"};
     Object data[][] = {};
     DefaultTableModel dtmHotel = new DefaultTableModel(data, columnHeaders_hotel);
-    DefaultTableModel dtmRoom = new DefaultTableModel(data, columnHeaders_hotel);
+    DefaultTableModel dtmRoom = new DefaultTableModel(data, columnHeaders_room);
 
     /**
      * Creates new form HotelManageGUI
@@ -92,6 +93,12 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         hotelNameCombox = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         roomTypeCombox = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        roomPriceField = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        roomDesField = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        roomOccupancyField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -256,7 +263,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(constructYearLabel)
                         .addComponent(constructYearFormatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Hotel", jPanel1);
@@ -284,11 +291,17 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
 
         jLabel8.setText("Hotel");
 
-        hotelNameCombox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        hotelNameCombox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1104-jj", "1103-uu" }));
 
         jLabel9.setText("Room Type");
 
         roomTypeCombox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel10.setText("Room Price");
+
+        jLabel11.setText("Room Description");
+
+        jLabel12.setText("Room Occupancy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -297,19 +310,33 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(roomDesField)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(showAllRoomBtn)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(showAllRoomBtn)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(hotelNameCombox, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addRoomBtn)
+                                    .addComponent(roomIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(roomTypeCombox, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel9))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(addRoomBtn)
-                            .addComponent(roomIdField)
-                            .addComponent(hotelNameCombox, 0, 159, Short.MAX_VALUE)
-                            .addComponent(roomTypeCombox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(roomOccupancyField, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                            .addComponent(roomPriceField))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -318,23 +345,33 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showAllRoomBtn)
                     .addComponent(addRoomBtn))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(roomIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(hotelNameCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(roomTypeCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(118, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(roomIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(hotelNameCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(roomPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(roomTypeCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(roomDesField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(roomOccupancyField, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Room", jPanel2);
@@ -439,7 +476,25 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     }//GEN-LAST:event_updateHotelBtnActionPerformed
 
     private void addRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomBtnActionPerformed
-        // TODO add your handling code here:
+// detect if the hotel id is already existed
+        String roomIdStr = roomIdField.getText();
+        int rm_num = Integer.parseInt(roomIdStr);
+        // if not, then add the hote info
+        if (!reposity.isRoomExisted(rm_num)) {
+            Room room = new Room();
+            room.setRm_num(rm_num);
+            assembleRoom(room);
+            reposity.addRoom(room);
+            // give user response saying the hotel is already existed
+            JOptionPane.showMessageDialog(this, "✔ Add successfully");
+            // display room table
+            showAllRoomBtnActionPerformed(evt);
+            clearRoomInputs();
+        } else {
+            // give user response saying the hotel is already existed
+            JOptionPane.showMessageDialog(this, "Room id exists!", "Add Room warning",
+                    JOptionPane.WARNING_MESSAGE);
+        }        // TODO add your handling code here:
         
     }//GEN-LAST:event_addRoomBtnActionPerformed
 
@@ -503,6 +558,9 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JTable hotelTable;
     private javax.swing.JComboBox<String> hotelTypeCombox;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -517,7 +575,10 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField phoneField;
+    private javax.swing.JTextField roomDesField;
     private javax.swing.JTextField roomIdField;
+    private javax.swing.JTextField roomOccupancyField;
+    private javax.swing.JTextField roomPriceField;
     private javax.swing.JTable roomTable;
     private javax.swing.JComboBox<String> roomTypeCombox;
     private javax.swing.JComboBox<String> searchByTypeCom;
@@ -573,6 +634,13 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         emailField.setText("");
 
     }
+    
+    private void clearRoomInputs()
+    {
+        roomDesField.setText("");
+        roomPriceField.setText("");
+        roomOccupancyField.setText("");
+    }
 
     /**
      * *
@@ -588,5 +656,17 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         hotel.setAddress(addressField.getText());
         hotel.setContact_phone(phoneField.getText());
         hotel.setContact_email(emailField.getText());
+    }
+    
+     private void assembleRoom(Room room)
+    {
+        room.setRm_des(roomDesField.getText());
+        room.setRm_price(Double.parseDouble(roomPriceField.getText()));
+        room.setRm_type(roomTypeCombox.getSelectedItem().toString());
+        String hotelInfo = hotelNameCombox.getSelectedItem().toString();
+        String[] hotelDetail = hotelInfo.split("-");
+        int hotelId = Integer.parseInt(hotelDetail[0]);
+        room.setHotel(reposity.getHotelById(hotelId));
+        room.setRm_occupancy(Integer.parseInt(roomOccupancyField.getText()));
     }
 }

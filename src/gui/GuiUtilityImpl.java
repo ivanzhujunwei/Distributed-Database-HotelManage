@@ -5,7 +5,7 @@
  */
 package gui;
 
-import entities.Hotel;
+import entities.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -94,6 +94,23 @@ public class GuiUtilityImpl implements GuiUtility
                 return 3;
         }
     }
+    
+    public int getRoomTypeIndexForCombox(Room room)
+    {
+        String type = room.getRm_type();
+        switch (type) {
+            case "suite":
+                return 0;
+            case "studio":
+                return 1;
+            case "double":
+                return 2;
+            case "single":
+                return 3;
+            default:
+                return 4;
+        }
+    }    
 
     @Override
     public int getSelectedRowId(JTable t)

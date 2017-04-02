@@ -112,6 +112,12 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         showAllGuests = new javax.swing.JButton();
 
 
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        guestTable = new javax.swing.JTable();
+        showAllGuests = new javax.swing.JButton();
+
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         hotelTable.setModel(dtmHotel);
@@ -573,7 +579,6 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         }        // TODO add your handling code here:
         
     }//GEN-LAST:event_addRoomBtnActionPerformed
-
 
     private void updateRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRoomBtnActionPerformed
         // detect if the hotel id is already existed

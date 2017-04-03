@@ -5,10 +5,11 @@
  */
 package gui;
 
-import entities.Hotel;
-import entities.Room;
+import entities.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -34,7 +35,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     Object data[][] = {};
     DefaultTableModel dtmHotel = new DefaultTableModel(data, columnHeaders_hotel);
     DefaultTableModel dtmRoom = new DefaultTableModel(data, columnHeaders_room);
-    DefaultTableModel dtmGuest = new DefaultTableModel(data, columnHeaders_room);
+    DefaultTableModel dtmGuest = new DefaultTableModel(data, columnHeaders_guest);
 
     /**
      * Creates new form HotelManageGUI
@@ -46,6 +47,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         guiUtility = new GuiUtilityImpl();
         this.hotelTable.getSelectionModel().addListSelectionListener(this);
         this.roomTable.getSelectionModel().addListSelectionListener(this);
+        this.guestTable.getSelectionModel().addListSelectionListener(this);
     }
 
     /**
@@ -55,7 +57,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -114,7 +117,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         findByNameBtn = new javax.swing.JButton();
         findByGuestNameField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        guestNameField = new javax.swing.JTextField();
+        guestNumberField = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         guestTitleField = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -211,29 +214,37 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jScrollPane1.setViewportView(hotelTable);
 
         showAllHotels.setText("Show All");
-        showAllHotels.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        showAllHotels.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 showAllHotelsActionPerformed(evt);
             }
         });
 
         addHotelBtn.setText("Add");
-        addHotelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addHotelBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addHotelBtnActionPerformed(evt);
             }
         });
 
         updateHotelBtn.setText("Update");
-        updateHotelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        updateHotelBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 updateHotelBtnActionPerformed(evt);
             }
         });
 
         deleteBtn.setText("Delete");
-        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteBtnActionPerformed(evt);
             }
         });
@@ -241,8 +252,10 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         searchByTypeCom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 star", "4 star", "3 star", "2 star" }));
 
         findByTypeBtn.setText("FindByType");
-        findByTypeBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        findByTypeBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 findByTypeBtnActionPerformed(evt);
             }
         });
@@ -379,15 +392,19 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jScrollPane2.setViewportView(roomTable);
 
         showAllRoomBtn.setText("Show All");
-        showAllRoomBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        showAllRoomBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 showAllRoomBtnActionPerformed(evt);
             }
         });
 
         addRoomBtn.setText("Add");
-        addRoomBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addRoomBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addRoomBtnActionPerformed(evt);
             }
         });
@@ -409,15 +426,19 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jLabel12.setText("Room Occupancy");
 
         updateRoomBtn.setText("Update");
-        updateRoomBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        updateRoomBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 updateRoomBtnActionPerformed(evt);
             }
         });
 
         roomDeleteBtn.setText("Delete");
-        roomDeleteBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        roomDeleteBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 roomDeleteBtnActionPerformed(evt);
             }
         });
@@ -508,36 +529,46 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jScrollPane3.setViewportView(guestTable);
 
         showAllGuests.setText("Show all");
-        showAllGuests.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        showAllGuests.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 showAllGuestsActionPerformed(evt);
             }
         });
 
         addGuestBtn.setText("Add");
-        addGuestBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addGuestBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addGuestBtnActionPerformed(evt);
             }
         });
 
         updateGuestBtn.setText("Update");
-        updateGuestBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        updateGuestBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 updateGuestBtnActionPerformed(evt);
             }
         });
 
         deleteGuestBtn.setText("Delete");
-        deleteGuestBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteGuestBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteGuestBtnActionPerformed(evt);
             }
         });
 
         findByNameBtn.setText("Find by name");
-        findByNameBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        findByNameBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 findByNameBtnActionPerformed(evt);
             }
         });
@@ -588,7 +619,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                                     .addComponent(guestPhoneField, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                                     .addComponent(guestFirstnameField, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(guestTitleField)
-                                    .addComponent(guestNameField)
+                                    .addComponent(guestNumberField)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                         .addComponent(addGuestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
@@ -646,7 +677,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(guestNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(guestNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20)
                     .addComponent(guestCountryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -695,49 +726,61 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jTabbedPane1.addTab("Guest", jPanel3);
 
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane4.setViewportView(customerTable);
 
         showAllCustomerBtn.setText("Show all");
-        showAllCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        showAllCustomerBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 showAllCustomerBtnActionPerformed(evt);
             }
         });
 
         findByMemBtn.setText("Find by membership");
-        findByMemBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        findByMemBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 findByMemBtnActionPerformed(evt);
             }
         });
 
         deleteCustomerBtn.setText("Delete");
-        deleteCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteCustomerBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteCustomerBtnActionPerformed(evt);
             }
         });
 
         updateCustomerBtn.setText("Update");
-        updateCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        updateCustomerBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 updateCustomerBtnActionPerformed(evt);
             }
         });
 
         addCustomerBtn.setText("Add ");
-        addCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addCustomerBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addCustomerBtnActionPerformed(evt);
             }
         });
@@ -924,42 +967,52 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jTabbedPane1.addTab("Customer", jPanel4);
 
         membershipTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane5.setViewportView(membershipTable);
 
         showAllMemBtn.setText("Show all");
-        showAllMemBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        showAllMemBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 showAllMemBtnActionPerformed(evt);
             }
         });
 
         addMemBtn.setText("Add ");
-        addMemBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addMemBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addMemBtnActionPerformed(evt);
             }
         });
 
         updateMemBtn.setText("Update");
-        updateMemBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        updateMemBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 updateMemBtnActionPerformed(evt);
             }
         });
 
         deleteMemBtn.setText("Delete");
-        deleteMemBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteMemBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteMemBtnActionPerformed(evt);
             }
         });
@@ -973,8 +1026,10 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jLabel40.setText("Reward");
 
         searchMemByCreditBtn.setText("Find membership by credit");
-        searchMemByCreditBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        searchMemByCreditBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 searchMemByCreditBtnActionPerformed(evt);
             }
         });
@@ -1059,13 +1114,15 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jTabbedPane1.addTab("Membership", jPanel5);
 
         bookingTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -1074,29 +1131,37 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jLabel41.setText("Booking id");
 
         showBookingBtn.setText("Show all");
-        showBookingBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        showBookingBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 showBookingBtnActionPerformed(evt);
             }
         });
 
         updateBookingBtn.setText("Update");
-        updateBookingBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        updateBookingBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 updateBookingBtnActionPerformed(evt);
             }
         });
 
         cancelBookingBtn.setText("Cancel");
-        cancelBookingBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cancelBookingBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cancelBookingBtnActionPerformed(evt);
             }
         });
 
         findBookByCustNameField.setText("Find by customer name");
-        findBookByCustNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        findBookByCustNameField.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 findBookByCustNameFieldActionPerformed(evt);
             }
         });
@@ -1186,7 +1251,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 825, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1325,7 +1390,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
 
     private void showAllGuestsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showAllGuestsActionPerformed
     {//GEN-HEADEREND:event_showAllGuestsActionPerformed
-        // TODO add your handling code here:
+        String sql = "SELECT * FROM GUEST";
+        guiUtility.displayTable(guestTable, sql, dtmGuest);
     }//GEN-LAST:event_showAllGuestsActionPerformed
 
     private void addGuestBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addGuestBtnActionPerformed
@@ -1527,7 +1593,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JTextField guestEmailField;
     private javax.swing.JTextField guestFirstnameField;
     private javax.swing.JTextField guestLastnameField;
-    private javax.swing.JTextField guestNameField;
+    private javax.swing.JTextField guestNumberField;
     private javax.swing.JTextField guestPhoneField;
     private javax.swing.JTextField guestPostcodeField;
     private javax.swing.JTextField guestStreetField;
@@ -1643,6 +1709,13 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 displayRoomDetail(room);
             }
         }
+                if (event.getSource() == guestTable.getSelectionModel()) {
+            if (guiUtility.isRowSelected(guestTable)) {
+                int guestNum = guiUtility.getSelectedRowId(guestTable);
+                Guest guest = reposity.getGusetById(guestNum);
+                displayGuestDetail(guest);
+            }
+        }
     }
 
     /**
@@ -1674,7 +1747,22 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         roomTypeCombox.setSelectedIndex(guiUtility.getRoomTypeIndexForCombox(room));
     }    
     
-
+    
+    private void displayGuestDetail(Guest guest)
+    {
+        guestNumberField.setText(guest.getNumber()+"");
+        guestFirstnameField.setText(guest.getFirstName());
+        guestTitleField.setText(guest.getTitle());
+        guestLastnameField.setText(guest.getLastName());
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        guestDOBField.setText(df.format(guest.getDob()));
+        guestEmailField.setText(guest.getEmail());
+        guestPhoneField.setText(guest.getPhone());
+        guestCountryField.setText(guest.getCountry());
+        guestCityField.setText(guest.getCity());
+        guestStreetField.setText(guest.getStreet());
+        guestPostcodeField.setText(guest.getPostcode()+"");
+    }  
     /**
      * *
      * Clear the text fields about hotel info

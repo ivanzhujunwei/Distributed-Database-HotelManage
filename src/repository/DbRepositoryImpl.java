@@ -105,15 +105,15 @@ public class DbRepositoryImpl implements DbRepository
         try {
             stmt = connB.createStatement();
             String sql = "INSERT INTO ROOM VALUES("
-                    + room.getRm_num()+ ","
-                    + room.getHotel().getHotelId()+ ",'"
+                    + room.getRm_num() + ","
+                    + room.getHotel().getHotelId() + ",'"
                     + room.getRm_type() + "',"
-                    + room.getRm_price()+ ",'"
+                    + room.getRm_price() + ",'"
                     + room.getRm_des() + "',"
-                    + room.getRm_occupancy()+")";
+                    + room.getRm_occupancy() + ")";
             System.out.println(sql);
             stmt.executeUpdate(sql);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -137,7 +137,7 @@ public class DbRepositoryImpl implements DbRepository
             Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void deleteHotel(int hotelId)
     {
@@ -150,8 +150,6 @@ public class DbRepositoryImpl implements DbRepository
             Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
 
     @Override
     public List<Hotel> findHotelsByType(String type)
@@ -168,7 +166,34 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public Guest getGusetById(int guestId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Guest guest = new Guest();
+        try {
+            stmt = connB.createStatement();
+            ResultSet rset = stmt.executeQuery("SELECT * FROM GUEST WHERE GUEST_NUM = " + guestId);
+            while (rset.next()) {
+                guest.setNumber(guestId);
+                guest.setTitle(rset.getString("TITLE"));
+                guest.setFirstName(rset.getString("FIRST_NAME"));
+                guest.setLastName(rset.getString("Last_name"));
+                guest.setDob(rset.getDate("DOB"));
+                guest.setCountry(rset.getString("Country"));
+                guest.setCity(rset.getString("City"));
+                guest.setStreet(rset.getString("Street"));
+                guest.setPostcode(rset.getInt("Postcode"));
+                guest.setPhone(rset.getString("Phone"));
+                guest.setEmail(rset.getString("Email"));
+            }
+            rset.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return guest;
     }
 
     @Override
@@ -271,7 +296,7 @@ public class DbRepositoryImpl implements DbRepository
     public boolean isRoomExisted(int roomId)
     {
         Room room = getRoomById(roomId);
-        return room.getRm_num() != 0;    
+        return room.getRm_num() != 0;
     }
 
     @Override
@@ -308,12 +333,13 @@ public class DbRepositoryImpl implements DbRepository
         return connB;
     }
 
-    public void updateRoom(Room room) {
+    public void updateRoom(Room room)
+    {
         try {
             stmt = connB.createStatement();
             /* update a student record using the values from JTextField txtID1 and txtName1 */
             String sql = "UPDATE ROOM SET rm_type = '" + room.getRm_type() + "',"
-                    + "rm_price = " + room.getRm_price()+ ","
+                    + "rm_price = " + room.getRm_price() + ","
                     + "rm_des = '" + room.getRm_des() + "',"
                     + "occupancy = " + room.getRm_occupancy()
                     + " WHERE rm_num = " + room.getRm_num();

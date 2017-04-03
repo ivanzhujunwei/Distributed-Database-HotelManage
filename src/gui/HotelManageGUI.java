@@ -9,11 +9,17 @@ import entities.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import repository.DbRepository;
 import repository.DbRepositoryImpl;
 
 /**
@@ -27,7 +33,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     ResultSet rset = null;
 
     GuiUtilityImpl guiUtility = null;
-    DbRepositoryImpl reposity = null;
+    DbRepository reposity = null;
 
     Object columnHeaders_hotel[] = {"Hote id", "name", "Type", "Country", "City"};
     Object columnHeaders_room[] = {"ROOM_NUMBER", "HOTEL_ID", "TYPE", "PRICE"};
@@ -582,6 +588,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         jLabel16.setText("Last name");
 
         jLabel17.setText("DOB");
+
+        guestDOBField.setToolTipText("");
 
         jLabel18.setText("Email");
 
@@ -1345,7 +1353,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     }//GEN-LAST:event_updateHotelBtnActionPerformed
 
     private void addRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomBtnActionPerformed
-// detect if the hotel id is already existed
+        // detect if the room id is already existed
         String roomIdStr = roomIdField.getText();
         int rm_num = Integer.parseInt(roomIdStr);
         // if not, then add the hote info
@@ -1363,7 +1371,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             // give user response saying the hotel is already existed
             JOptionPane.showMessageDialog(this, "Room id exists!", "Add Room warning",
                     JOptionPane.WARNING_MESSAGE);
-        }        // TODO add your handling code here:
+        }
         
     }//GEN-LAST:event_addRoomBtnActionPerformed
 
@@ -1396,12 +1404,47 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
 
     private void addGuestBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addGuestBtnActionPerformed
     {//GEN-HEADEREND:event_addGuestBtnActionPerformed
-        // TODO add your handling code here:
+        // detect if the guest number is already existed
+        String guestNumStr = guestNumberField.getText();
+        int guest_num = Integer.parseInt(guestNumStr);
+        // if not, then add the hote info
+        if (!reposity.isGuestExisted(guest_num)) {
+            Guest guest = new Guest();
+            guest.setNumber(guest_num);
+            assembleGuest(guest);
+            reposity.addGuest(guest);
+            // give user response saying the hotel is already existed
+            JOptionPane.showMessageDialog(this, "✔ Add successfully");
+            // display room table
+            showAllGuestsActionPerformed(evt);
+            clearGuestInputs();
+        } else {
+            // give user response saying the hotel is already existed
+            JOptionPane.showMessageDialog(this, "Guest id exists!", "Add guest warning",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_addGuestBtnActionPerformed
 
     private void updateGuestBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_updateGuestBtnActionPerformed
     {//GEN-HEADEREND:event_updateGuestBtnActionPerformed
-        // TODO add your handling code here:
+        // detect if the guest id is already existed
+        String guestNumStr = guestNumberField.getText();
+        int guestNum = Integer.parseInt(guestNumStr);
+        // only can update the hotel that is already existed 
+        if (reposity.isGuestExisted(guestNum)) {
+            Guest guest = reposity.getGusetById(guestNum);
+            assembleGuest(guest);
+            reposity.updateGuest(guest);
+            // show update successfully
+            JOptionPane.showMessageDialog(this, "✔ Update successfully");
+            // display hotel table
+            showAllRoomBtnActionPerformed(evt);
+            clearRoomInputs();
+        } else {
+            // give user response saying the hotel does not exist
+            JOptionPane.showMessageDialog(this, "Hotel id does not exist, you can only update a hotel that exists!", "Update hotel warning",
+                    JOptionPane.WARNING_MESSAGE);
+    }                
     }//GEN-LAST:event_updateGuestBtnActionPerformed
 
     private void deleteGuestBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteGuestBtnActionPerformed
@@ -1709,7 +1752,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 displayRoomDetail(room);
             }
         }
-                if (event.getSource() == guestTable.getSelectionModel()) {
+        if (event.getSource() == guestTable.getSelectionModel()) {
             if (guiUtility.isRowSelected(guestTable)) {
                 int guestNum = guiUtility.getSelectedRowId(guestTable);
                 Guest guest = reposity.getGusetById(guestNum);
@@ -1736,6 +1779,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         phoneField.setText(hotel.getContact_phone());
         emailField.setText(hotel.getContact_email());
     }
+    
+    
     private void displayRoomDetail(Room room)
     {
         roomIdField.setText(room.getRm_num()+ "");
@@ -1754,8 +1799,9 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         guestFirstnameField.setText(guest.getFirstName());
         guestTitleField.setText(guest.getTitle());
         guestLastnameField.setText(guest.getLastName());
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        guestDOBField.setText(df.format(guest.getDob()));
+//        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+//        guestDOBField.setText(df.format(guest.getDob()));
+        guestDOBField.setText(guest.getDob().substring(0,10));
         guestEmailField.setText(guest.getEmail());
         guestPhoneField.setText(guest.getPhone());
         guestCountryField.setText(guest.getCountry());
@@ -1786,6 +1832,20 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         roomPriceField.setText("");
         roomOccupancyField.setText("");
     }
+    
+    private void clearGuestInputs(){
+        guestNumberField.setText("");
+        guestTitleField.setText("");
+        guestFirstnameField.setText("");
+        guestLastnameField.setText("");
+        guestDOBField.setText("");
+        guestEmailField.setText("");
+        guestPhoneField.setText("");
+        guestCountryField.setText("");
+        guestCityField.setText("");
+        guestStreetField.setText("");
+        guestPostcodeField.setText("");
+    }
 
     /**
      * *
@@ -1814,4 +1874,27 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         room.setHotel(reposity.getHotelById(hotelId));
         room.setRm_occupancy(Integer.parseInt(roomOccupancyField.getText()));
     }
+     
+     private void assembleGuest(Guest guest){
+         guest.setNumber(Integer.parseInt(guestNumberField.getText()));
+         guest.setTitle(guestTitleField.getText());
+         guest.setFirstName(guestFirstnameField.getText());
+         guest.setLastName(guestLastnameField.getText());
+
+//         DateFormat format = new SimpleDateFormat("MM/dd/YYYY");
+//         Date date = null;
+//         try {
+//             date = format.parse(guestDOBField.getText());
+//         } catch (ParseException ex) {
+//             Logger.getLogger(HotelManageGUI.class.getName()).log(Level.SEVERE, null, ex);
+//         }
+         guest.setDob(guestDOBField.getText());
+         guest.setEmail(guestEmailField.getText());
+         guest.setPhone(guestPhoneField.getText());
+         guest.setCountry(guestCountryField.getText());
+         guest.setCity(guestCityField.getText());
+         guest.setStreet(guestStreetField.getText());
+         guest.setPostcode(Integer.parseInt(guestPostcodeField.getText()));
+         
+     }
 }

@@ -18,7 +18,7 @@ public class Members
     private String title;
     private String firstName;
     private String lastName;
-    private Date dob;
+    private String dob;
     private String country;
     private String city;
     private String street;
@@ -66,15 +66,16 @@ public class Members
         this.lastName = lastName;
     }
 
-    public Date getDob()
+    public String getDob()
     {
         return dob;
     }
 
-    public void setDob(Date dob)
+    public void setDob(String dob)
     {
         this.dob = dob;
     }
+
 
     public String getCountry()
     {

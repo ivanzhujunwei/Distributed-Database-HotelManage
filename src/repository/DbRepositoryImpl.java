@@ -214,6 +214,12 @@ public class DbRepositoryImpl implements DbRepository
     }
 
     @Override
+    public void deleteMembership(String mem_tier)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
     public void deleteRoom(int roomId)
     {
         try {
@@ -503,6 +509,12 @@ public class DbRepositoryImpl implements DbRepository
     public Connection getConnectionB()
     {
         return connB;
+    }
+
+    @Override
+    public void updateMembership(Membership ms)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void updateRoom(Room room)

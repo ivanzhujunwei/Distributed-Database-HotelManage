@@ -50,6 +50,10 @@ public interface DbRepository
     
     public void deleteCustomer(int customerNum);
     
+    public void updateMembership(Membership ms);
+    
+    public void deleteMembership(String mem_tier);
+    
     /***
      * Find hotels by hotel type
      * @param type hotel type

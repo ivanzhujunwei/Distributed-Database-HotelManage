@@ -44,19 +44,95 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public void addBooking(Booking booking)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        try {
+//            stmt = connB.createStatement();
+//            String sql = "INSERT INTO Booking VALUES("
+//                    + booking.getNumber()+ ",'"
+//                    + booking.getTitle()+ "','"
+//                    + booking.getFirstName()+ "','"
+//                    + booking.getLastName()+ "','"
+//                    + booking.getDob()+ "','"
+//                    + booking.getCountry()+ "','"
+//                    + booking.getCity()+ "','"
+//                    + booking.getStreet()+ "','"
+//                    + booking.getPostcode()+ "','"
+//                    + booking.getMs().getMem_tier()+ "','"
+//                    + booking.getCredit()+ "','"
+//                    + customer.getPhone()+ "','"
+//                    + customer.getEmail()+ "')";
+//            System.out.println("Add guest sql: "+sql);
+//            stmt.executeUpdate(sql);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            try {
+//                stmt.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
     }
 
     @Override
     public void addCustomer(Customer customer)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            stmt = connB.createStatement();
+            String sql = "INSERT INTO Customer VALUES("
+                    + customer.getNumber()+ ",'"
+                    + customer.getTitle()+ "','"
+                    + customer.getFirstName()+ "','"
+                    + customer.getLastName()+ "','"
+                    + customer.getDob()+ "','"
+                    + customer.getCountry()+ "','"
+                    + customer.getCity()+ "','"
+                    + customer.getStreet()+ "','"
+                    + customer.getPostcode()+ "','"
+                    + customer.getMs().getMem_tier()+ "','"
+                    + customer.getCredit()+ "','"
+                    + customer.getPhone()+ "','"
+                    + customer.getEmail()+ "')";
+            System.out.println("Add guest sql: "+sql);
+            stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override
     public void addGuest(Guest guest)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            stmt = connB.createStatement();
+            String sql = "INSERT INTO GUEST VALUES("
+                    + guest.getNumber()+ ",'"
+                    + guest.getTitle()+ "','"
+                    + guest.getFirstName()+ "','"
+                    + guest.getLastName()+ "',"
+                    + "TO_DATE('"+ guest.getDob()+ "','YYYY-MM-DD'),'"
+                    + guest.getCountry()+ "','"
+                    + guest.getCity()+ "','"
+                    + guest.getStreet()+ "',"
+                    + guest.getPostcode()+ ",'"
+                    + guest.getPhone()+ "','"
+                    + guest.getEmail()+ "')";
+            System.out.println("Add guest sql: "+sql);
+            stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override
@@ -105,15 +181,15 @@ public class DbRepositoryImpl implements DbRepository
         try {
             stmt = connB.createStatement();
             String sql = "INSERT INTO ROOM VALUES("
-                    + room.getRm_num()+ ","
-                    + room.getHotel().getHotelId()+ ",'"
+                    + room.getRm_num() + ","
+                    + room.getHotel().getHotelId() + ",'"
                     + room.getRm_type() + "',"
-                    + room.getRm_price()+ ",'"
+                    + room.getRm_price() + ",'"
                     + room.getRm_des() + "',"
-                    + room.getRm_occupancy()+")";
+                    + room.getRm_occupancy() + ")";
             System.out.println(sql);
             stmt.executeUpdate(sql);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -123,6 +199,24 @@ public class DbRepositoryImpl implements DbRepository
                 Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    @Override
+    public void deleteCustomer(int customerNum)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteGuest(int guestNum)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteMembership(String mem_tier)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -137,7 +231,7 @@ public class DbRepositoryImpl implements DbRepository
             Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void deleteHotel(int hotelId)
     {
@@ -150,8 +244,6 @@ public class DbRepositoryImpl implements DbRepository
             Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
 
     @Override
     public List<Hotel> findHotelsByType(String type)
@@ -162,13 +254,71 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public Customer getCustomerById(int customerID)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Customer customer = new Customer();
+        try {
+            stmt = connB.createStatement();
+            ResultSet rset = stmt.executeQuery("SELECT * FROM GUEST WHERE CUS_NUM = " + customerID);
+            while (rset.next()) {
+                customer.setNumber(customerID);
+                customer.setTitle(rset.getString("TITLE"));
+                customer.setFirstName(rset.getString("FIRST_NAME"));
+                customer.setLastName(rset.getString("Last_name"));
+                customer.setDob(rset.getString("DOB"));
+                customer.setCountry(rset.getString("Country"));
+                customer.setCity(rset.getString("City"));
+                customer.setStreet(rset.getString("Street"));
+                customer.setPostcode(rset.getInt("Postcode"));
+                customer.setPhone(rset.getString("Phone"));
+                customer.setEmail(rset.getString("Email"));
+                
+                String membershipStr = rset.getString("MEM_TIER");
+                Membership ms = getMembershipByTier(membershipStr);
+                customer.setMs(ms);
+            }
+            rset.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return customer;
     }
 
     @Override
     public Guest getGusetById(int guestId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Guest guest = new Guest();
+        try {
+            stmt = connB.createStatement();
+            ResultSet rset = stmt.executeQuery("SELECT * FROM GUEST WHERE GUEST_NUM = " + guestId);
+            while (rset.next()) {
+                guest.setNumber(guestId);
+                guest.setTitle(rset.getString("TITLE"));
+                guest.setFirstName(rset.getString("FIRST_NAME"));
+                guest.setLastName(rset.getString("Last_name"));
+                guest.setDob(rset.getString("DOB"));
+                guest.setCountry(rset.getString("Country"));
+                guest.setCity(rset.getString("City"));
+                guest.setStreet(rset.getString("Street"));
+                guest.setPostcode(rset.getInt("Postcode"));
+                guest.setPhone(rset.getString("Phone"));
+                guest.setEmail(rset.getString("Email"));
+            }
+            rset.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return guest;
     }
 
     @Override
@@ -211,7 +361,27 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public Membership getMembershipByTier(String memTier)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Membership ms = new Membership();
+        try {
+            stmt = connB.createStatement();
+            ResultSet rset = stmt.executeQuery("SELECT * FROM Membership WHERE mem_tier = " + memTier);
+            while (rset.next()) {
+                  ms.setMem_tier(memTier);
+                  ms.setTier_credit(rset.getInt("TIER_CREDIT"));
+                  ms.setDiscount(rset.getDouble("DISCOUNT"));
+                  ms.setReward(rset.getDouble("REWARD"));
+            }
+            rset.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return ms;
     }
 
     @Override
@@ -228,6 +398,7 @@ public class DbRepositoryImpl implements DbRepository
                 room.setRm_des(rset.getString("rm_des"));
                 Hotel hotel = getHotelById(rset.getInt("ht_id"));
                 room.setHotel(hotel);
+                room.setRm_occupancy(rset.getInt("occupancy"));
             }
             rset.close();
         } catch (SQLException f) {
@@ -245,13 +416,15 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public boolean isCustomerExisted(int customerId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Customer customer= getCustomerById(customerId);
+        return customer.getNumber()!= 0;
     }
 
     @Override
     public boolean isGuestExisted(int guestId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Guest guest = getGusetById(guestId);
+        return guest.getNumber()!= 0;
     }
 
     @Override
@@ -264,14 +437,44 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public boolean isMembershipExisted(String mem_tier)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Membership ms = getMembershipByTier(mem_tier);
+        return !ms.getMem_tier().equals("");
     }
 
     @Override
     public boolean isRoomExisted(int roomId)
     {
         Room room = getRoomById(roomId);
-        return room.getRm_num() != 0;    
+        return room.getRm_num() != 0;
+    }
+
+    @Override
+    public void updateCustomer(Customer customer)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateGuest(Guest guest)
+    {
+//        try {
+//            stmt = connA.createStatement();
+//            /* update a student record using the values from JTextField txtID1 and txtName1 */
+//            String sql = "UPDATE HOTEL SET HT_NAME = '" + hotel.getHotelName() + "',"
+//                    + "HT_TYPE = '" + hotel.getHotelType() + "',"
+//                    + "CONSTRUCTION_YEAR = " + hotel.getYear() + ","
+//                    + "COUNTRY = '" + hotel.getCountry() + "',"
+//                    + "CITY = '" + hotel.getCity() + "',"
+//                    + "ADDRESS = '" + hotel.getAddress() + "',"
+//                    + "CONTACT_NUMBER = " + hotel.getContact_phone() + ","
+//                    + "EMAIL = '" + hotel.getContact_email() + "'"
+//                    + " WHERE HT_ID = " + hotel.getHotelId();
+//            System.out.println(sql);
+//            stmt.executeUpdate(sql);
+//            stmt.close();
+//        } catch (SQLException f) {
+//            System.out.println(f.getMessage());
+//        }
     }
 
     @Override
@@ -308,12 +511,19 @@ public class DbRepositoryImpl implements DbRepository
         return connB;
     }
 
-    public void updateRoom(Room room) {
+    @Override
+    public void updateMembership(Membership ms)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void updateRoom(Room room)
+    {
         try {
             stmt = connB.createStatement();
             /* update a student record using the values from JTextField txtID1 and txtName1 */
             String sql = "UPDATE ROOM SET rm_type = '" + room.getRm_type() + "',"
-                    + "rm_price = " + room.getRm_price()+ ","
+                    + "rm_price = " + room.getRm_price() + ","
                     + "rm_des = '" + room.getRm_des() + "',"
                     + "occupancy = " + room.getRm_occupancy()
                     + " WHERE rm_num = " + room.getRm_num();

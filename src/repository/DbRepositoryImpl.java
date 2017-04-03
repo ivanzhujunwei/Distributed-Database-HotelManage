@@ -451,24 +451,24 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public void updateGuest(Guest guest)
     {
-        try {
-            stmt = connA.createStatement();
-            /* update a student record using the values from JTextField txtID1 and txtName1 */
-            String sql = "UPDATE HOTEL SET HT_NAME = '" + hotel.getHotelName() + "',"
-                    + "HT_TYPE = '" + hotel.getHotelType() + "',"
-                    + "CONSTRUCTION_YEAR = " + hotel.getYear() + ","
-                    + "COUNTRY = '" + hotel.getCountry() + "',"
-                    + "CITY = '" + hotel.getCity() + "',"
-                    + "ADDRESS = '" + hotel.getAddress() + "',"
-                    + "CONTACT_NUMBER = " + hotel.getContact_phone() + ","
-                    + "EMAIL = '" + hotel.getContact_email() + "'"
-                    + " WHERE HT_ID = " + hotel.getHotelId();
-            System.out.println(sql);
-            stmt.executeUpdate(sql);
-            stmt.close();
-        } catch (SQLException f) {
-            System.out.println(f.getMessage());
-        }
+//        try {
+//            stmt = connA.createStatement();
+//            /* update a student record using the values from JTextField txtID1 and txtName1 */
+//            String sql = "UPDATE HOTEL SET HT_NAME = '" + hotel.getHotelName() + "',"
+//                    + "HT_TYPE = '" + hotel.getHotelType() + "',"
+//                    + "CONSTRUCTION_YEAR = " + hotel.getYear() + ","
+//                    + "COUNTRY = '" + hotel.getCountry() + "',"
+//                    + "CITY = '" + hotel.getCity() + "',"
+//                    + "ADDRESS = '" + hotel.getAddress() + "',"
+//                    + "CONTACT_NUMBER = " + hotel.getContact_phone() + ","
+//                    + "EMAIL = '" + hotel.getContact_email() + "'"
+//                    + " WHERE HT_ID = " + hotel.getHotelId();
+//            System.out.println(sql);
+//            stmt.executeUpdate(sql);
+//            stmt.close();
+//        } catch (SQLException f) {
+//            System.out.println(f.getMessage());
+//        }
     }
 
     @Override

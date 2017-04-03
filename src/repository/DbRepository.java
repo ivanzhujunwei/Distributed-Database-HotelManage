@@ -40,6 +40,8 @@ public interface DbRepository
     
     public void updateRoom(Room room);
     
+    public void deleteRoom(int roomId);
+    
     /***
      * Find hotels by hotel type
      * @param type hotel type

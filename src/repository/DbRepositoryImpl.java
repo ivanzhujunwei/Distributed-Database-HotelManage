@@ -126,6 +126,19 @@ public class DbRepositoryImpl implements DbRepository
     }
 
     @Override
+    public void deleteRoom(int roomId)
+    {
+        try {
+            stmt = connB.createStatement();
+            String sql = "DELETE FROM ROOM WHERE rm_num = " + roomId;
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @Override
     public void deleteHotel(int hotelId)
     {
         try {
@@ -137,6 +150,8 @@ public class DbRepositoryImpl implements DbRepository
             Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
 
     @Override
     public List<Hotel> findHotelsByType(String type)

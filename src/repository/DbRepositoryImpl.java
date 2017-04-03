@@ -153,7 +153,34 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public Guest getGusetById(int guestId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Guest guest = new Guest();
+        try {
+            stmt = connB.createStatement();
+            ResultSet rset = stmt.executeQuery("SELECT * FROM GUEST WHERE GUEST_NUM = " + guestId);
+            while (rset.next()) {
+                guest.setNumber(guestId);
+                guest.setTitle(rset.getString("TITLE"));
+                guest.setFirstName(rset.getString("FIRST_NAME"));
+                guest.setLastName(rset.getString("Last_name"));
+                guest.setDob(rset.getDate("DOB"));
+                guest.setCountry(rset.getString("Country"));
+                guest.setCity(rset.getString("City"));
+                guest.setStreet(rset.getString("Street"));
+                guest.setPostcode(rset.getInt("Postcode"));
+                guest.setPhone(rset.getString("Phone"));
+                guest.setEmail(rset.getString("Email"));
+            }
+            rset.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return guest;
     }
 
     @Override

@@ -166,7 +166,25 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public void addMembership(Membership membership)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            stmt = connB.createStatement();
+            String sql = "INSERT INTO MEMBERSHIP VALUES("
+                    + membership.getMem_tier() + ","
+                    + membership.getTier_credit() + ","
+                    + membership.getDiscount() + ","
+                    + membership.getReward()+")";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override
@@ -216,7 +234,14 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public void deleteMembership(String mem_tier)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            stmt = connB.createStatement();
+            String sql = "DELETE FROM MEMBERSHIP WHERE mem_tier = " + mem_tier;
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }      
     }
 
     @Override
@@ -514,7 +539,19 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public void updateMembership(Membership ms)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            stmt = connB.createStatement();
+            /* update a student record using the values from JTextField txtID1 and txtName1 */
+            String sql = "UPDATE MEMBERSHIP SET mem_tier = '" + ms.getMem_tier()+ "',"
+                    + "tier_credits = " + ms.getTier_credit() + ","
+                    + "discount = '" + ms.getDiscount() + "',"
+                    + "reward = " + ms.getReward();
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        }       
     }
 
     public void updateRoom(Room room)

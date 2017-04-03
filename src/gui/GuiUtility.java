@@ -33,6 +33,13 @@ public interface GuiUtility
     public int getSelectedRowId(JTable t);
     
     /***
+     * Get selected row name which is the primary id for that table 
+     * @param t
+     * @return row header name
+     */
+    public String getSelectedRowName(JTable t);
+    
+    /***
      * Judge if the table row has been selected or not
      * @param t  table
      * @return return true if selected rows is more than one; return false if not

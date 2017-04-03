@@ -54,12 +54,21 @@ public interface DbRepository
     
     public void deleteMembership(String mem_tier);
     
+    public void cancelBooking(int bookingId);
+    
+    public void updateBooking(Booking booking);
+    
+    
+    public void cancelPayment(int payId);
+    
     /***
      * Find hotels by hotel type
      * @param type hotel type
      * @return hotel list 
      */
     public List<Hotel> findHotelsByType(String type);
+    
+    
     
     /////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////// Judge object is existed or not : START  ////////////////////////
@@ -123,6 +132,8 @@ public interface DbRepository
     public Guest getGusetById(int guestId);
     
     public Membership getMembershipByTier(String memTier);
+    
+    public Booking getBookingById(String bookId);
 
     /////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////// Get object by its primary id : END  //////////////////////////

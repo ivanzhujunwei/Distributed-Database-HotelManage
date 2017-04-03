@@ -6,7 +6,6 @@
 package gui;
 
 import entities.*;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -14,9 +13,9 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import repository.DBConnection;
 import repository.DbRepositoryImpl;
 
 /**
@@ -53,6 +52,7 @@ public class GuiUtilityImpl implements GuiUtility
     @Override
     public void displayTable(JTable t, String sql, DefaultTableModel dtm)
     {
+        System.out.println(sql);
         try {
             this.clearTable(t);
             // hotel table is in FIT5148A database
@@ -94,7 +94,24 @@ public class GuiUtilityImpl implements GuiUtility
                 return 3;
         }
     }
-    
+
+    public int getCustMembershipIndexForCombox(Customer customer)
+    {
+        String membership = customer.getMs().getMem_tier();
+        switch (membership) {
+            case "5 star":
+                return 0;
+            case "4 star":
+                return 1;
+            case "3 star":
+                return 2;
+            case "2 star":
+                return 3;
+            default:
+                return 3;
+        }
+    }
+
     public int getRoomTypeIndexForCombox(Room room)
     {
         String type = room.getRm_type();
@@ -110,7 +127,7 @@ public class GuiUtilityImpl implements GuiUtility
             default:
                 return 4;
         }
-    }    
+    }
 
     @Override
     public int getSelectedRowId(JTable t)
@@ -119,11 +136,43 @@ public class GuiUtilityImpl implements GuiUtility
         String rowId = t.getValueAt(selectedRowIndex, 0).toString();
         return Integer.parseInt(rowId);
     }
+    
+    @Override
+    public String getSelectedRowName(JTable t)
+    {
+        int selectedRowIndex = t.getSelectedRow();
+        String rowname = t.getValueAt(selectedRowIndex, 0).toString();
+        return rowname;
+    }
+    
+
+    void iniCombox(String sql, JComboBox<String> custMemCombo)
+    {
+        try {
+            stmt = DbRepositoryImpl.connB.createStatement();
+            ResultSet rset = stmt.executeQuery(sql);
+            custMemCombo.removeAllItems();
+            while (rset.next()) {
+                String item = rset.getString(1);
+                custMemCombo.addItem(item);
+            }
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(GuiUtilityImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public boolean isRowSelected(JTable t)
     {
         return t.getSelectedRow() >= 0;
+    }
+
+    public int getSelectedCustomerId(JComboBox chosenCustomerCombo)
+    {
+        String selectedCustomer = chosenCustomerCombo.getSelectedItem().toString();
+        String cust_num = selectedCustomer.split("-")[0];
+        return Integer.parseInt(cust_num);
     }
 
 }

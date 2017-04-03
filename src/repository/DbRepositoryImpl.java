@@ -44,33 +44,35 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public void addBooking(Booking booking)
     {
-//        try {
-//            stmt = connB.createStatement();
-//            String sql = "INSERT INTO Booking VALUES("
-//                    + booking.getNumber()+ ",'"
-//                    + booking.getTitle()+ "','"
-//                    + booking.getFirstName()+ "','"
-//                    + booking.getLastName()+ "','"
-//                    + booking.getDob()+ "','"
-//                    + booking.getCountry()+ "','"
-//                    + booking.getCity()+ "','"
-//                    + booking.getStreet()+ "','"
-//                    + booking.getPostcode()+ "','"
-//                    + booking.getMs().getMem_tier()+ "','"
-//                    + booking.getCredit()+ "','"
-//                    + customer.getPhone()+ "','"
-//                    + customer.getEmail()+ "')";
-//            System.out.println("Add guest sql: "+sql);
-//            stmt.executeUpdate(sql);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            try {
-//                stmt.close();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+        try {
+            stmt = connB.createStatement();
+            String sql = "INSERT INTO Booking (booking_id,cus_num,rm_num,checkin_date,checkout_date,contact_person,contact_email,total_amount) VALUES(s_booking.nextval,"
+                    + booking.getCustomer().getNumber()+ ","
+                    + booking.getRoom().getRm_num()+ ","
+                    + "TO_DATE('"+ booking.getCheckIn()+ "','YYYY-MM-DD'),"
+                    + "TO_DATE('"+ booking.getCheckOut()+ "','YYYY-MM-DD'),'"
+                    + booking.getPerson()+ "','"
+                    + booking.getEmail()+ "',"
+                    + booking.getTotalAmount()+ ")";
+            System.out.println("Add booking sql: "+sql);
+            stmt.executeUpdate(sql);
+            // add to booking_room
+            String brSql = "INSERT INTO BOOKING_ROOM VALUES (s_booking.currval,"+ booking.getRoom().getRm_num()+")";
+            stmt.executeUpdate(brSql);
+            // add to booking_guest
+            for(Guest g: booking.getGuestList()){
+                String bgSql = "INSERT INTO BOOKING_GUESTS VALUES (s_booking.currval,"+ g.getNumber()+")";
+                stmt.executeUpdate(bgSql);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override
@@ -82,8 +84,8 @@ public class DbRepositoryImpl implements DbRepository
                     + customer.getNumber()+ ",'"
                     + customer.getTitle()+ "','"
                     + customer.getFirstName()+ "','"
-                    + customer.getLastName()+ "','"
-                    + customer.getDob()+ "','"
+                    + customer.getLastName()+ "',"
+                    + "TO_DATE('"+ customer.getDob()+ "','YYYY-MM-DD'),'"
                     + customer.getCountry()+ "','"
                     + customer.getCity()+ "','"
                     + customer.getStreet()+ "','"
@@ -92,7 +94,7 @@ public class DbRepositoryImpl implements DbRepository
                     + customer.getCredit()+ "','"
                     + customer.getPhone()+ "','"
                     + customer.getEmail()+ "')";
-            System.out.println("Add guest sql: "+sql);
+            System.out.println("Add customer sql: "+sql);
             stmt.executeUpdate(sql);
         } catch (SQLException ex) {
             Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,8 +170,8 @@ public class DbRepositoryImpl implements DbRepository
     {
         try {
             stmt = connB.createStatement();
-            String sql = "INSERT INTO MEMBERSHIP VALUES("
-                    + membership.getMem_tier() + ","
+            String sql = "INSERT INTO MEMBERSHIP VALUES('"
+                    + membership.getMem_tier() + "',"
                     + membership.getTier_credit() + ","
                     + membership.getDiscount() + ","
                     + membership.getReward()+")";
@@ -220,15 +222,55 @@ public class DbRepositoryImpl implements DbRepository
     }
 
     @Override
-    public void deleteCustomer(int customerNum)
+    public void cancelBooking(int bookingId)
+    {
+        try {
+            stmt = connB.createStatement();
+            String bgsql = "DELETE FROM booking_guests WHERE booking_id = " + bookingId;
+            stmt.executeUpdate(bgsql);
+            
+            String broomsql = "DELETE FROM booking_room WHERE booking_id = " + bookingId;
+            stmt.executeUpdate(broomsql);
+            
+            String sql = "DELETE FROM booking WHERE booking_id = " + bookingId;
+            stmt.executeUpdate(sql);
+            
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void cancelPayment(int payId)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
+    public void deleteCustomer(int customerNum)
+    {
+        try {
+            stmt = connB.createStatement();
+            String sql = "DELETE FROM CUSTOMER WHERE CUS_NUM = " + customerNum;
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
     public void deleteGuest(int guestNum)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            stmt = connB.createStatement();
+            String sql = "DELETE FROM GUEST WHERE GUEST_NUM = " + guestNum;
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -236,7 +278,7 @@ public class DbRepositoryImpl implements DbRepository
     {
         try {
             stmt = connB.createStatement();
-            String sql = "DELETE FROM MEMBERSHIP WHERE mem_tier = " + mem_tier;
+            String sql = "DELETE FROM MEMBERSHIP WHERE mem_tier = '" + mem_tier + "'";
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException ex) {
@@ -277,12 +319,50 @@ public class DbRepositoryImpl implements DbRepository
     }
 
     @Override
+    public Booking getBookingById(String bookId)
+    {
+//        Customer customer = new Customer();
+//        try {
+//            stmt = connB.createStatement();
+//            ResultSet rset = stmt.executeQuery("SELECT * FROM CUSTOMER WHERE CUS_NUM = " + customerID);
+//            while (rset.next()) {
+//                customer.setNumber(customerID);
+//                customer.setTitle(rset.getString("TITLE"));
+//                customer.setFirstName(rset.getString("FIRST_NAME"));
+//                customer.setLastName(rset.getString("Last_name"));
+//                customer.setDob(rset.getString("DOB"));
+//                customer.setCountry(rset.getString("Country"));
+//                customer.setCity(rset.getString("City"));
+//                customer.setStreet(rset.getString("Street"));
+//                customer.setPostcode(rset.getInt("Postcode"));
+//                customer.setPhone(rset.getString("Phone"));
+//                customer.setEmail(rset.getString("Email"));
+//                
+//                String membershipStr = rset.getString("MEM_TIER");
+//                Membership ms = getMembershipByTier(membershipStr);
+//                customer.setMs(ms);
+//            }
+//            rset.close();
+//        } catch (SQLException f) {
+//            System.out.println(f.getMessage());
+//        } finally {
+//            try {
+//                stmt.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        return customer;
+        return null;
+    }
+
+    @Override
     public Customer getCustomerById(int customerID)
     {
         Customer customer = new Customer();
         try {
             stmt = connB.createStatement();
-            ResultSet rset = stmt.executeQuery("SELECT * FROM GUEST WHERE CUS_NUM = " + customerID);
+            ResultSet rset = stmt.executeQuery("SELECT * FROM CUSTOMER WHERE CUS_NUM = " + customerID);
             while (rset.next()) {
                 customer.setNumber(customerID);
                 customer.setTitle(rset.getString("TITLE"));
@@ -389,10 +469,10 @@ public class DbRepositoryImpl implements DbRepository
         Membership ms = new Membership();
         try {
             stmt = connB.createStatement();
-            ResultSet rset = stmt.executeQuery("SELECT * FROM Membership WHERE mem_tier = " + memTier);
+            ResultSet rset = stmt.executeQuery("SELECT * FROM Membership WHERE mem_tier = '" + memTier +"'");
             while (rset.next()) {
                   ms.setMem_tier(memTier);
-                  ms.setTier_credit(rset.getInt("TIER_CREDIT"));
+                  ms.setTier_credit(rset.getInt("TIER_CREDITS"));
                   ms.setDiscount(rset.getDouble("DISCOUNT"));
                   ms.setReward(rset.getDouble("REWARD"));
             }
@@ -463,7 +543,7 @@ public class DbRepositoryImpl implements DbRepository
     public boolean isMembershipExisted(String mem_tier)
     {
         Membership ms = getMembershipByTier(mem_tier);
-        return !ms.getMem_tier().equals("");
+        return ms.getMem_tier()!=null;
     }
 
     @Override
@@ -474,32 +554,61 @@ public class DbRepositoryImpl implements DbRepository
     }
 
     @Override
-    public void updateCustomer(Customer customer)
+    public void updateBooking(Booking booking)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
+    public void updateCustomer(Customer customer)
+    {
+        try {
+            stmt = connB.createStatement();
+            String sql = "UPDATE CUSTOMER SET CUS_NUM = '" + customer.getNumber()+ "',"
+                    + "TITLE = '" + customer.getTitle()+ "',"
+                    + "FIRST_NAME = '" + customer.getFirstName()+ "',"
+                    + "LAST_NAME = '" + customer.getLastName()+ "',"
+                    + "DOB = "   + "TO_DATE('"+ customer.getDob()+ "','YYYY-MM-DD'),"
+                    + "COUNTRY = '" + customer.getCountry()+ "',"
+                    + "CITY = '" + customer.getCity() + "',"
+                    + "STREET = '" + customer.getStreet() + "',"
+                    + "POSTCODE = '" + customer.getPostcode()+ "',"
+                    + "PHONE = '" + customer.getPhone()+ "',"
+                    + "MEM_TIER = '" + customer.getMs().getMem_tier()+ "',"
+                    + "CREDIT = " + customer.getCredit()+ ","
+                    + "EMAIL = '" + customer.getEmail()+ "'"
+                    + " WHERE CUS_NUM = " + customer.getNumber();
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        }
+    }
+
+    @Override
     public void updateGuest(Guest guest)
     {
-//        try {
-//            stmt = connA.createStatement();
-//            /* update a student record using the values from JTextField txtID1 and txtName1 */
-//            String sql = "UPDATE HOTEL SET HT_NAME = '" + hotel.getHotelName() + "',"
-//                    + "HT_TYPE = '" + hotel.getHotelType() + "',"
-//                    + "CONSTRUCTION_YEAR = " + hotel.getYear() + ","
-//                    + "COUNTRY = '" + hotel.getCountry() + "',"
-//                    + "CITY = '" + hotel.getCity() + "',"
-//                    + "ADDRESS = '" + hotel.getAddress() + "',"
-//                    + "CONTACT_NUMBER = " + hotel.getContact_phone() + ","
-//                    + "EMAIL = '" + hotel.getContact_email() + "'"
-//                    + " WHERE HT_ID = " + hotel.getHotelId();
-//            System.out.println(sql);
-//            stmt.executeUpdate(sql);
-//            stmt.close();
-//        } catch (SQLException f) {
-//            System.out.println(f.getMessage());
-//        }
+        try {
+            stmt = connB.createStatement();
+            String sql = "UPDATE GUEST SET GUEST_NUM = '" + guest.getNumber()+ "',"
+                    + "TITLE = '" + guest.getTitle()+ "',"
+                    + "FIRST_NAME = '" + guest.getFirstName()+ "',"
+                    + "LAST_NAME = '" + guest.getLastName()+ "',"
+                    + "DOB = "   + "TO_DATE('"+ guest.getDob()+ "','YYYY-MM-DD'),"
+                    + "COUNTRY = '" + guest.getCountry()+ "',"
+                    + "CITY = '" + guest.getCity() + "',"
+                    + "STREET = '" + guest.getStreet() + "',"
+                    + "POSTCODE = '" + guest.getPostcode()+ "',"
+                    + "PHONE = '" + guest.getPhone()+ "',"
+                    + "EMAIL = '" + guest.getEmail()+ "'"
+                    + " WHERE GUEST_NUM = " + guest.getNumber();
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        }
     }
 
     @Override
@@ -544,8 +653,9 @@ public class DbRepositoryImpl implements DbRepository
             /* update a student record using the values from JTextField txtID1 and txtName1 */
             String sql = "UPDATE MEMBERSHIP SET mem_tier = '" + ms.getMem_tier()+ "',"
                     + "tier_credits = " + ms.getTier_credit() + ","
-                    + "discount = '" + ms.getDiscount() + "',"
-                    + "reward = " + ms.getReward();
+                    + "discount = " + ms.getDiscount() + ","
+                    + "reward = " + ms.getReward() 
+                    + " WHERE MEM_TIER = '" + ms.getMem_tier() + "'" ;
             System.out.println(sql);
             stmt.executeUpdate(sql);
             stmt.close();
@@ -554,6 +664,7 @@ public class DbRepositoryImpl implements DbRepository
         }       
     }
 
+    @Override
     public void updateRoom(Room room)
     {
         try {

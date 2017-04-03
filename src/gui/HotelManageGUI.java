@@ -5,10 +5,11 @@
  */
 package gui;
 
-import entities.Hotel;
-import entities.Room;
+import entities.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -34,7 +35,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     Object data[][] = {};
     DefaultTableModel dtmHotel = new DefaultTableModel(data, columnHeaders_hotel);
     DefaultTableModel dtmRoom = new DefaultTableModel(data, columnHeaders_room);
-    DefaultTableModel dtmGuest = new DefaultTableModel(data, columnHeaders_room);
+    DefaultTableModel dtmGuest = new DefaultTableModel(data, columnHeaders_guest);
 
     /**
      * Creates new form HotelManageGUI
@@ -46,6 +47,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         guiUtility = new GuiUtilityImpl();
         this.hotelTable.getSelectionModel().addListSelectionListener(this);
         this.roomTable.getSelectionModel().addListSelectionListener(this);
+        this.guestTable.getSelectionModel().addListSelectionListener(this);
     }
 
     /**
@@ -114,7 +116,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         findByNameBtn = new javax.swing.JButton();
         findByGuestNameField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        guestNameField = new javax.swing.JTextField();
+        guestNumberField = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         guestTitleField = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -602,14 +604,13 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(guestPhoneField, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(guestFirstnameField)
-                                        .addComponent(guestTitleField, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(guestNameField, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addComponent(addGuestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                                            .addComponent(updateGuestBtn)))
+                                    .addComponent(guestFirstnameField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(guestTitleField)
+                                    .addComponent(guestNumberField)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(addGuestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                        .addComponent(updateGuestBtn))
                                     .addComponent(guestLastnameField)
                                     .addComponent(guestDOBField)
                                     .addComponent(guestEmailField))))
@@ -663,7 +664,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(guestNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(guestNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20)
                     .addComponent(guestCountryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -917,9 +918,9 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                             .addComponent(custStreetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel32))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(custPostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel31))))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel31)
+                            .addComponent(custPostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1237,7 +1238,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1377,7 +1378,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
 
     private void showAllGuestsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showAllGuestsActionPerformed
     {//GEN-HEADEREND:event_showAllGuestsActionPerformed
-        // TODO add your handling code here:
+        String sql = "SELECT * FROM GUEST";
+        guiUtility.displayTable(guestTable, sql, dtmGuest);
     }//GEN-LAST:event_showAllGuestsActionPerformed
 
     private void addGuestBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addGuestBtnActionPerformed
@@ -1563,7 +1565,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JTextField guestEmailField;
     private javax.swing.JTextField guestFirstnameField;
     private javax.swing.JTextField guestLastnameField;
-    private javax.swing.JTextField guestNameField;
+    private javax.swing.JTextField guestNumberField;
     private javax.swing.JTextField guestPhoneField;
     private javax.swing.JTextField guestPostcodeField;
     private javax.swing.JTextField guestStreetField;
@@ -1678,6 +1680,13 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 displayRoomDetail(room);
             }
         }
+        if (event.getSource() == guestTable.getSelectionModel()) {
+            if (guiUtility.isRowSelected(guestTable)) {
+                int guestNum = guiUtility.getSelectedRowId(guestTable);
+                Guest guest = reposity.getGusetById(guestNum);
+                displayGuestDetail(guest);
+            }
+        }
     }
 
     /**
@@ -1707,7 +1716,26 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
 //        hotelNameCombox.setSelectedIndex(guiUtility.getRoomTypeIndexForCombox(room));
         roomDesField.setText(room.getRm_des() + "");
         roomTypeCombox.setSelectedIndex(guiUtility.getRoomTypeIndexForCombox(room));
-    }    
+    }  
+    
+    private void displayGuestDetail(Guest guest)
+    {
+        guestNumberField.setText(guest.getNumber()+"");
+        guestFirstnameField.setText(guest.getFirstName());
+        guestTitleField.setText(guest.getTitle());
+        guestLastnameField.setText(guest.getLastName());
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+String reportDate = df.format(guest.getDob());
+
+        
+        guestDOBField.setText(df.format(guest.getDob()));
+        guestEmailField.setText(guest.getEmail());
+        guestPhoneField.setText(guest.getPhone());
+        guestCountryField.setText(guest.getCountry());
+        guestCityField.setText(guest.getCity());
+        guestStreetField.setText(guest.getStreet());
+        guestPostcodeField.setText(guest.getPostcode()+"");
+    }  
     
 
     /**

@@ -136,7 +136,7 @@ public class GuiUtilityImpl implements GuiUtility
         String rowId = t.getValueAt(selectedRowIndex, 0).toString();
         return Integer.parseInt(rowId);
     }
-    
+
     @Override
     public String getSelectedRowName(JTable t)
     {
@@ -144,7 +144,21 @@ public class GuiUtilityImpl implements GuiUtility
         String rowname = t.getValueAt(selectedRowIndex, 0).toString();
         return rowname;
     }
-    
+
+    @Override
+    public Booking getUpdatedBookingFromTable(JTable t)
+    {
+        int selectedRowIndex = t.getSelectedRow();
+        String bookingId = t.getValueAt(selectedRowIndex, 0).toString();
+        String contactPerson = t.getValueAt(selectedRowIndex, 6).toString();
+        String contactEmail = t.getValueAt(selectedRowIndex, 7).toString();
+        Booking b = new Booking();
+        b.setBookingId(Integer.parseInt(bookingId));
+        b.setPerson(contactPerson);
+        b.setEmail(contactEmail);
+        return b;
+
+    }
 
     void iniCombox(String sql, JComboBox<String> custMemCombo)
     {

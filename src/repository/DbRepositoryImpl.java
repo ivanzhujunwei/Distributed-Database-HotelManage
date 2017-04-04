@@ -190,9 +190,24 @@ public class DbRepositoryImpl implements DbRepository
     }
 
     @Override
-    public void addPayment(Payment payment)
+    public void addPayment(int bookingId, double totalAmount, String payMethod)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // add the payment
+        try {
+            stmt = connB.createStatement();
+            String sql = "INSERT INTO Payment VALUES(s_payment.nextval,"
+                    + "TO_DATE(sysdate,'YYYY-MM-DD'),'"
+                    + payMethod + "',"
+                    + totalAmount + ")";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            // update the booking status, and customer credit will automatically increased
+            String setBookingPaidSql = "UPDATE booking set pay_status = 1, pay_id = s_payment.currval where booking_id= " + bookingId;
+            stmt.executeUpdate(setBookingPaidSql);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -242,9 +257,21 @@ public class DbRepositoryImpl implements DbRepository
     }
 
     @Override
-    public void cancelPayment(int payId)
+    public void cancelPayment(int payId, int bookingId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            stmt = connB.createStatement();
+            
+            // update booking table
+            String broomsql = "update booking set pay_id = null, pay_status = 0 WHERE booking_id = " + bookingId;
+            stmt.executeUpdate(broomsql);
+            // delete payment record
+            String bgsql = "DELETE FROM payment WHERE pay_id = " + payId;
+            stmt.executeUpdate(bgsql);
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -556,7 +583,17 @@ public class DbRepositoryImpl implements DbRepository
     @Override
     public void updateBooking(Booking booking)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            stmt = connB.createStatement();
+            String sql = "UPDATE Booking SET Contact_PERSON = '" + booking.getPerson()+ "',"
+                    + "CONTACT_EMAIL = '" + booking.getEmail()+ "' "
+                    + " WHERE booking_id = " + booking.getBookingId();
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        }
     }
 
     @Override

@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package entities;
-
-import java.util.Date;
-
 /**
  *
  * @author Ivan Zhu <ivanzhujunwei@gmail.com>
@@ -15,7 +12,7 @@ public class Payment
 {
 
     private int pay_id;
-    private Date pay_date;
+    private String pay_date;
     private String pay_method;
     private double pay_amount;
 
@@ -29,12 +26,12 @@ public class Payment
         this.pay_id = pay_id;
     }
 
-    public Date getPay_date()
+    public String getPay_date()
     {
         return pay_date;
     }
 
-    public void setPay_date(Date pay_date)
+    public void setPay_date(String pay_date)
     {
         this.pay_date = pay_date;
     }

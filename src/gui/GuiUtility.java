@@ -5,9 +5,8 @@
  */
 package gui;
 
+import entities.Booking;
 import entities.Hotel;
-import java.sql.ResultSet;
-import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -52,4 +51,10 @@ public interface GuiUtility
      * @return index in combox
      */
     public int getHotelTypeIndexForCombox(Hotel hotel);
+    
+    /***
+     * Update a booking by editing booking table row
+     * @return 
+     */
+    public Booking getUpdatedBookingFromTable(JTable t);
 }

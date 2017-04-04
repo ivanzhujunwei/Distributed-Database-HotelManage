@@ -58,8 +58,7 @@ public interface DbRepository
     
     public void updateBooking(Booking booking);
     
-    
-    public void cancelPayment(int payId);
+    public void cancelPayment(int payId, int bookingid);
     
     /***
      * Find hotels by hotel type
@@ -108,7 +107,7 @@ public interface DbRepository
     
     public void addBooking(Booking booking);
     
-    public void addPayment(Payment payment);
+    public void addPayment(int bookingId, double totalAmount, String payMethod);
     
     /////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////// Add object : END  ////////////////////////////////////////////

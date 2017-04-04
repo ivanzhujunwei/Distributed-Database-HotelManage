@@ -15,10 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -47,6 +44,9 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     Object columnHeaders_chooseGuest[] = {"Guest number-name"};
 
     Object columnHeaders_booking[] = {"BookingId", "Customer name", "Room number", "Check in", "Check out", "Total amout", "Contact person", "Contact email","Paid status"};
+    Object columnHeaders_unpaidBooking[] = {"BookingId", "Customer name", "Room number", "Hotel","City","Check in", "Check out", "Total amout", "Contact email"};
+    
+    Object columnHeaders_payment[] = {"Payment id", "booking id", "date", "pay amount", "pay method"};
 
     Object data[][] = {};
     DefaultTableModel dtmHotel = new DefaultTableModel(data, columnHeaders_hotel);
@@ -59,6 +59,9 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     DefaultTableModel dtmAvailableRoom = new DefaultTableModel(data, columnHeaders_room);
     DefaultTableModel dtmChooseGuest = new DefaultTableModel(data, columnHeaders_chooseGuest);
     DefaultTableModel dtmBooking = new DefaultTableModel(data, columnHeaders_booking);
+    
+    DefaultTableModel dtmUnpaidBooking = new DefaultTableModel(data, columnHeaders_unpaidBooking);
+    DefaultTableModel dtmPayment = new DefaultTableModel(data, columnHeaders_payment);
 
     /**
      * Creates new form HotelManageGUI
@@ -75,6 +78,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         this.membershipTable.getSelectionModel().addListSelectionListener(this);
         this.availableRoomTable.getSelectionModel().addListSelectionListener(this);
         this.chooseGuestTable.getSelectionModel().addListSelectionListener(this);
+        this.unpaidBookingTable.getSelectionModel().addListSelectionListener(this);
+        this.paymentTable.getSelectionModel().addListSelectionListener(this);
     }
 
     /**
@@ -266,6 +271,21 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         searchByCustomerBtn = new javax.swing.JButton();
         searchByCustCombo = new javax.swing.JComboBox<>();
         showAllBookingBtn = new javax.swing.JButton();
+        updateBookingBtn = new javax.swing.JButton();
+        jLabel46 = new javax.swing.JLabel();
+        paymentPanel = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        unpaidBookingTable = new javax.swing.JTable();
+        payBtn = new javax.swing.JButton();
+        deletePaymentBtn = new javax.swing.JButton();
+        searchByCustBtn = new javax.swing.JButton();
+        searchPayByCustCombo = new javax.swing.JComboBox<>();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        paymentTable = new javax.swing.JTable();
+        jSeparator2 = new javax.swing.JSeparator();
+        showAllPayment = new javax.swing.JButton();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -557,7 +577,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -717,7 +737,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(roomDesField)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(showAllRoomBtn)
@@ -731,7 +751,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                                     .addComponent(roomTypeCombox, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(hotelNameCombox, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(roomIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 426, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
                                     .addComponent(jLabel10))
@@ -923,7 +943,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                                 .addComponent(findByGuestNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(findByNameBtn)
-                                .addGap(0, 231, Short.MAX_VALUE))))
+                                .addGap(0, 407, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -1137,7 +1157,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                                     .addComponent(custPostcodeField, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                                     .addComponent(custMemCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(custCreditField))))
-                        .addGap(0, 129, Short.MAX_VALUE))))
+                        .addGap(0, 305, Short.MAX_VALUE))))
         );
         customerPanelLayout.setVerticalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1415,59 +1435,71 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             }
         });
 
+        updateBookingBtn.setText("Update");
+        updateBookingBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                updateBookingBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel46.setText("* Only contact person and email can be updated.");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane8)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(updateBookingBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(showAllBookingBtn)
+                                .addGap(21, 21, 21)
+                                .addComponent(cancelBookBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(searchByCustCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(searchByCustomerBtn))))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGap(13, 13, 13)
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel42)
-                                            .addComponent(jLabel43)
-                                            .addComponent(jLabel41)))
+                                    .addComponent(jLabel42)
+                                    .addComponent(jLabel43)
+                                    .addComponent(jLabel41)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                        .addContainerGap()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel45)))
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGap(14, 14, 14)
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(checkoutDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                                            .addComponent(checkoutDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(checkinDatepicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(bookRoomRateCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(bookRoomRateCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(bookRoomTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
+                                .addGap(1, 1, 1)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(findAvaiaiableRoomsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addComponent(jLabel44)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(bookRoomOccupField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane8)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(showAllBookingBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cancelBookBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(searchByCustCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchByCustomerBtn)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -1509,11 +1541,121 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                     .addComponent(cancelBookBtn)
                     .addComponent(searchByCustomerBtn)
                     .addComponent(searchByCustCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(showAllBookingBtn))
+                    .addComponent(showAllBookingBtn)
+                    .addComponent(updateBookingBtn)
+                    .addComponent(jLabel46))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Try booking", jPanel6);
+
+        unpaidBookingTable.setModel(dtmUnpaidBooking);
+        jScrollPane9.setViewportView(unpaidBookingTable);
+
+        payBtn.setText("Pay");
+        payBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                payBtnActionPerformed(evt);
+            }
+        });
+
+        deletePaymentBtn.setText("Delete");
+        deletePaymentBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                deletePaymentBtnActionPerformed(evt);
+            }
+        });
+
+        searchByCustBtn.setText("Search by customer");
+        searchByCustBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                searchByCustBtnActionPerformed(evt);
+            }
+        });
+
+        paymentTable.setModel(dtmPayment);
+        jScrollPane10.setViewportView(paymentTable);
+
+        showAllPayment.setText("Show all");
+        showAllPayment.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                showAllPaymentActionPerformed(evt);
+            }
+        });
+
+        jLabel47.setText("Unpaid bookings");
+
+        jLabel48.setText("Payments");
+
+        javax.swing.GroupLayout paymentPanelLayout = new javax.swing.GroupLayout(paymentPanel);
+        paymentPanel.setLayout(paymentPanelLayout);
+        paymentPanelLayout.setHorizontalGroup(
+            paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paymentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paymentPanelLayout.createSequentialGroup()
+                        .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane10)
+                            .addComponent(jScrollPane9)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paymentPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel48)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator2)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paymentPanelLayout.createSequentialGroup()
+                        .addGap(0, 407, Short.MAX_VALUE)
+                        .addComponent(showAllPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deletePaymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(searchPayByCustCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchByCustBtn)
+                        .addGap(20, 20, 20))
+                    .addGroup(paymentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel47)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(payBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+        paymentPanelLayout.setVerticalGroup(
+            paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paymentPanelLayout.createSequentialGroup()
+                .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(paymentPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(payBtn)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paymentPanelLayout.createSequentialGroup()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paymentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel48)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
+                .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deletePaymentBtn)
+                    .addComponent(searchPayByCustCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchByCustBtn)
+                    .addComponent(showAllPayment))
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Payment", paymentPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1910,12 +2052,43 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             case 5:
                 initChoseCustomerCombo();
                 break;
+            case 6:// payment panel
+                showAllUnpaidBooking();
+                showAllPayment();
+                initPaymentCustomerCombo();
+                break;
             default:
                 break;
         }
-
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
+    private void showAllUnpaidBooking(){
+        String showUnpaidBookingSql = "SELECT b.booking_id,"
+                + "  cus.first_name"
+                + "  || ' '"
+                + "  || cus.last_name,"
+                + "  b.rm_num,"
+                + "  hotel.ht_name,"
+                + "  hotel.city,"
+                + "  b.checkin_date,"
+                + "  b.checkout_date,"
+                + "  b.total_amount,"
+                + "  b.contact_email"
+                + " FROM booking b"
+                + " LEFT JOIN customer cus"
+                + " ON cus.cus_num = b.cus_num"
+                + " LEFT JOIN booking_room bm on b.booking_id = bm.booking_id"
+                + " LEFT JOIN room rm on bm.rm_num = rm.rm_num"
+                + " LEFT JOIN hotel@FIT5148A hotel on hotel.ht_id = rm.ht_id"
+                + " WHERE b.pay_status <> 1 or b.pay_status is null";
+        guiUtility.displayTable(unpaidBookingTable, showUnpaidBookingSql, dtmUnpaidBooking);
+    }
+    
+    private void showAllPayment(){
+        String sql = "SELECT p.pay_id,b.booking_id,p.pay_date, p.pay_amount,p.pay_method FROM PAYMENT p LEFT JOIN Booking b on b.pay_id = p.pay_id";
+         guiUtility.displayTable(paymentTable, sql, dtmPayment);
+    }
+    
     private String datePattern = "yyyy-MM-dd";
     private DateFormat dateFormatter = new SimpleDateFormat(datePattern);
 
@@ -2081,6 +2254,71 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         guiUtility.displayTable(bookingTable, sql, dtmBooking);
     }//GEN-LAST:event_searchByCustomerBtnActionPerformed
 
+    private void updateBookingBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_updateBookingBtnActionPerformed
+    {//GEN-HEADEREND:event_updateBookingBtnActionPerformed
+        if (guiUtility.isRowSelected(bookingTable)) {
+                Booking booking = guiUtility.getUpdatedBookingFromTable(bookingTable);
+                reposity.updateBooking(booking);
+                // show delete successfully
+                JOptionPane.showMessageDialog(this, "✔ Update successfully");
+                showAllCustomerBtnActionPerformed(evt);
+        } else {
+            JOptionPane.showMessageDialog(this, "Select and edit a booking first", "Update booking warning",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_updateBookingBtnActionPerformed
+
+    private void payBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_payBtnActionPerformed
+    {//GEN-HEADEREND:event_payBtnActionPerformed
+        if (guiUtility.isRowSelected(unpaidBookingTable)) {
+            int selectedRowIndex = unpaidBookingTable.getSelectedRow();
+            String bookingId = unpaidBookingTable.getValueAt(selectedRowIndex, 0).toString();
+            String totalAmount  = unpaidBookingTable.getValueAt(selectedRowIndex, 7).toString();
+            //default method
+            reposity.addPayment(Integer.parseInt(bookingId), Double.parseDouble(totalAmount), "Paypal");
+            // show delete successfully
+            JOptionPane.showMessageDialog(this, "✔ Paid successfully");
+            showAllUnpaidBooking();
+            showAllPayment();
+        } else {
+            JOptionPane.showMessageDialog(this, "Select and edit a booking first", "Update booking warning",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_payBtnActionPerformed
+
+    private void deletePaymentBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deletePaymentBtnActionPerformed
+    {//GEN-HEADEREND:event_deletePaymentBtnActionPerformed
+        if (guiUtility.isRowSelected(paymentTable)) {
+            int dialogResult = JOptionPane.showConfirmDialog(this, "Really delete the selected payment?", "Warning", JOptionPane.YES_NO_OPTION);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                int selectedRowIndex = paymentTable.getSelectedRow();
+                String payId = paymentTable.getValueAt(selectedRowIndex, 0).toString();
+                String bookingId  = paymentTable.getValueAt(selectedRowIndex, 1).toString();
+                reposity.cancelPayment(Integer.parseInt(payId),Integer.parseInt(bookingId));
+                // show delete successfully
+                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
+                showAllPayment();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Select a payment first", "Delete payment warning",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_deletePaymentBtnActionPerformed
+
+    private void searchByCustBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchByCustBtnActionPerformed
+    {//GEN-HEADEREND:event_searchByCustBtnActionPerformed
+        String customer = searchPayByCustCombo.getSelectedItem().toString();
+        String customer_num_str = customer.split("-")[0];
+        String sql = "SELECT p.pay_id,b.booking_id,p.pay_amount,p.pay_method FROM PAYMENT p LEFT JOIN Booking b on b.pay_id = p.pay_id where cus_num = "
+                + Integer.parseInt(customer_num_str);
+        guiUtility.displayTable(paymentTable, sql, dtmPayment);
+    }//GEN-LAST:event_searchByCustBtnActionPerformed
+
+    private void showAllPaymentActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showAllPaymentActionPerformed
+    {//GEN-HEADEREND:event_showAllPaymentActionPerformed
+        showAllPayment();
+    }//GEN-LAST:event_showAllPaymentActionPerformed
+
     private String getRoomOccupancySql(String roomOccupancy)
     {
         if (roomOccupancy.trim().equals("")) {
@@ -2137,6 +2375,11 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         String sql = "Select cus_num || '-' ||first_name || ' ' || last_name from customer";
         guiUtility.iniCombox(sql, chosenCustomerCombo);
         guiUtility.iniCombox(sql, searchByCustCombo);
+    }
+    
+    public void initPaymentCustomerCombo(){
+        String sql = "Select cus_num || '-' ||first_name || ' ' || last_name from customer";
+        guiUtility.iniCombox(sql, searchPayByCustCombo);
     }
 
     /**
@@ -2234,6 +2477,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JButton deleteCustomerBtn;
     private javax.swing.JButton deleteGuestBtn;
     private javax.swing.JButton deleteMemBtn;
+    private javax.swing.JButton deletePaymentBtn;
     private javax.swing.JTextField discountField;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton findAvaiaiableRoomsBtn;
@@ -2303,6 +2547,9 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
@@ -2326,6 +2573,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2333,10 +2581,15 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField memTierField;
     private javax.swing.JTable membershipTable;
+    private javax.swing.JButton payBtn;
+    private javax.swing.JPanel paymentPanel;
+    private javax.swing.JTable paymentTable;
     private javax.swing.JTextField phoneField;
     private javax.swing.JTextField rewardField;
     private javax.swing.JButton roomDeleteBtn;
@@ -2346,18 +2599,23 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private javax.swing.JTextField roomPriceField;
     private javax.swing.JTable roomTable;
     private javax.swing.JComboBox<String> roomTypeCombox;
+    private javax.swing.JButton searchByCustBtn;
     private javax.swing.JComboBox<String> searchByCustCombo;
     private javax.swing.JButton searchByCustomerBtn;
     private javax.swing.JComboBox<String> searchByTypeCom;
     private javax.swing.JButton searchMemByCreditBtn;
+    private javax.swing.JComboBox<String> searchPayByCustCombo;
     private javax.swing.JButton showAllBookingBtn;
     private javax.swing.JButton showAllCustomerBtn;
     private javax.swing.JButton showAllGuests;
     private javax.swing.JButton showAllHotels;
     private javax.swing.JButton showAllMemBtn;
+    private javax.swing.JButton showAllPayment;
     private javax.swing.JButton showAllRoomBtn;
     private javax.swing.JTextField tierCreditField;
     private javax.swing.JTextField totalAmountField;
+    private javax.swing.JTable unpaidBookingTable;
+    private javax.swing.JButton updateBookingBtn;
     private javax.swing.JButton updateCustomerBtn;
     private javax.swing.JButton updateGuestBtn;
     private javax.swing.JButton updateHotelBtn;

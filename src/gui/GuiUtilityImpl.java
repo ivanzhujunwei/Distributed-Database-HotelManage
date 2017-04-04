@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import repository.DbRepositoryImpl;
 
@@ -187,6 +188,17 @@ public class GuiUtilityImpl implements GuiUtility
         String selectedCustomer = chosenCustomerCombo.getSelectedItem().toString();
         String cust_num = selectedCustomer.split("-")[0];
         return Integer.parseInt(cust_num);
+    }
+
+    @Override
+    public boolean validateTextFieldEmpty(List<JTextField> fields)
+    {
+        for(JTextField field: fields){
+            if(field.getText().equals("")){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

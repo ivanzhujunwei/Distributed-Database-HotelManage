@@ -7,7 +7,9 @@ package gui;
 
 import entities.Booking;
 import entities.Hotel;
+import java.util.List;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -57,4 +59,13 @@ public interface GuiUtility
      * @return 
      */
     public Booking getUpdatedBookingFromTable(JTable t);
+    
+    /***
+     * Validate the text fields is empty or not
+     * @param fields
+     * @return return false if any one of them is empty
+     */
+    public boolean validateTextFieldEmpty(List<JTextField> fields);
+    
+    
 }

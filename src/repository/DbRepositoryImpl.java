@@ -40,7 +40,7 @@ public class DbRepositoryImpl implements DbRepository
         connA = DBConnection.getConnectionA();
         connB = DBConnection.getConnectionB();
     }
-
+    
     @Override
     public void addBooking(Booking booking)
     {
@@ -402,7 +402,7 @@ public class DbRepositoryImpl implements DbRepository
                 customer.setPostcode(rset.getInt("Postcode"));
                 customer.setPhone(rset.getString("Phone"));
                 customer.setEmail(rset.getString("Email"));
-                
+                customer.setCredit(rset.getInt("Credit"));
                 String membershipStr = rset.getString("MEM_TIER");
                 Membership ms = getMembershipByTier(membershipStr);
                 customer.setMs(ms);

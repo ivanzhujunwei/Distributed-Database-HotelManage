@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,7 +58,8 @@ public class DbRepositoryImpl implements DbRepository
             System.out.println("Add booking sql: "+sql);
             stmt.executeUpdate(sql);
             // add to booking_room
-            String brSql = "INSERT INTO BOOKING_ROOM VALUES (s_booking.currval,"+ booking.getRoom().getRm_num()+")";
+            String brSql = "INSERT INTO BOOKING_ROOM VALUES (s_bookingroom.nextval, s_booking.currval,"+ booking.getRoom().getRm_num()+")";
+           System.out.println("Add bookingRoom sql: "+brSql);
             stmt.executeUpdate(brSql);
             // add to booking_guest
             for(Guest g: booking.getGuestList()){
@@ -204,6 +206,8 @@ public class DbRepositoryImpl implements DbRepository
             // update the booking status, and customer credit will automatically increased
             String setBookingPaidSql = "UPDATE booking set pay_status = 1, pay_id = s_payment.currval where booking_id= " + bookingId;
             stmt.executeUpdate(setBookingPaidSql);
+            // detect how many credit does the customer have and which membership tier he/she should be
+            
             stmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -517,6 +521,35 @@ public class DbRepositoryImpl implements DbRepository
     }
 
     @Override
+    public List<Membership> getMs()
+    {
+        List<Membership> lists = new ArrayList<>();
+        try {
+            stmt = connB.createStatement();
+            ResultSet rset = stmt.executeQuery("SELECT * FROM Membership order by tier_credits desc");
+            while (rset.next()) {
+                Membership ms = new Membership();
+                ms.setMem_tier(rset.getString("mem_tier"));
+                ms.setTier_credit(Integer.parseInt(rset.getString("tier_credits")));
+                ms.setDiscount(Double.parseDouble(rset.getString("discount")));
+                ms.setReward(Double.parseDouble(rset.getString("reward")));
+                lists.add(ms);
+            }
+            rset.close();
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DbRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lists;
+        
+    }
+
+    @Override
     public Room getRoomById(int roomid)
     {
         Room room = new Room();
@@ -605,7 +638,7 @@ public class DbRepositoryImpl implements DbRepository
                     + "TITLE = '" + customer.getTitle()+ "',"
                     + "FIRST_NAME = '" + customer.getFirstName()+ "',"
                     + "LAST_NAME = '" + customer.getLastName()+ "',"
-                    + "DOB = "   + "TO_DATE('"+ customer.getDob()+ "','YYYY-MM-DD'),"
+                    + "DOB = "   + "TO_DATE('"+ customer.getDob().substring(0,10)+ "','YYYY-MM-DD'),"
                     + "COUNTRY = '" + customer.getCountry()+ "',"
                     + "CITY = '" + customer.getCity() + "',"
                     + "STREET = '" + customer.getStreet() + "',"
@@ -710,6 +743,7 @@ public class DbRepositoryImpl implements DbRepository
             String sql = "UPDATE ROOM SET rm_type = '" + room.getRm_type() + "',"
                     + "rm_price = " + room.getRm_price() + ","
                     + "rm_des = '" + room.getRm_des() + "',"
+                     + "ht_id = " + room.getHotel().getHotelId()+ ","
                     + "occupancy = " + room.getRm_occupancy()
                     + " WHERE rm_num = " + room.getRm_num();
             System.out.println(sql);

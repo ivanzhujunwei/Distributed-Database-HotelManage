@@ -67,6 +67,11 @@ public interface DbRepository
      */
     public List<Hotel> findHotelsByType(String type);
     
+    /***
+     * Get all memberships
+     * @return 
+     */
+    public List<Membership> getMs();
     
     
     /////////////////////////////////////////////////////////////////////////////////////////

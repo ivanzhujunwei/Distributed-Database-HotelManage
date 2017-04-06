@@ -48,7 +48,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     Object columnHeaders_booking[] = {"BookingId", "Customer name", "Room number", "Check in", "Check out", "Total amout", "Contact person", "Contact email","Paid status"};
     Object columnHeaders_unpaidBooking[] = {"BookingId", "Customer name", "Room number", "Hotel","City","Check in", "Check out", "Total amout", "Contact email"};
     
-    Object columnHeaders_payment[] = {"Payment id", "booking id", "date", "pay amount", "pay method"};
+    Object columnHeaders_payment[] = {"Payment id", "booking id", "Customer name","date", "pay amount", "pay method"};
 
     Object data[][] = {};
     DefaultTableModel dtmHotel = new DefaultTableModel(data, columnHeaders_hotel);
@@ -842,21 +842,15 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(roomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(showAllRoomBtn)
+                    .addGroup(roomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addRoomBtn)
+                        .addComponent(updateRoomBtn)
+                        .addComponent(roomDeleteBtn))
                     .addGroup(roomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(roomPanelLayout.createSequentialGroup()
-                            .addGroup(roomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(showAllRoomBtn)
-                                .addGroup(roomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(addRoomBtn)
-                                    .addComponent(updateRoomBtn)
-                                    .addComponent(roomDeleteBtn)))
-                            .addGap(7, 7, 7))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomPanelLayout.createSequentialGroup()
-                            .addComponent(findByFacilityBtn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                    .addGroup(roomPanelLayout.createSequentialGroup()
-                        .addComponent(findByFacilityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(findByFacilityBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(findByFacilityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(roomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(roomIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -878,7 +872,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addComponent(roomDesField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Room", roomPanel);
@@ -1794,8 +1788,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 int hotelId = guiUtility.getSelectedRowId(hotelTable);
                 reposity.deleteHotel(hotelId);
                 // show delete successfully
-                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
                 showAllHotelsActionPerformed(evt);
+                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Select a hotel first", "Delete hotel error",
@@ -1965,8 +1959,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 int id = guiUtility.getSelectedRowId(guestTable);
                 reposity.deleteGuest(id);
                 // show delete successfully
-                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
                 showAllGuestsActionPerformed(evt);
+                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Select a guest first", "Delete guest error",
@@ -2052,8 +2046,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 int id = guiUtility.getSelectedRowId(customerTable);
                 reposity.deleteCustomer(id);
                 // show delete successfully
-                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
                 showAllCustomerBtnActionPerformed(evt);
+                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Select a customer first", "Delete customer error",
@@ -2136,8 +2130,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 String memTier = guiUtility.getSelectedRowName(membershipTable);
                 reposity.deleteMembership(memTier);
                 // show delete successfully
-                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
                 showAllMemBtnActionPerformed(evt);
+                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Select a membership first", "Delete membership error",
@@ -2148,6 +2142,16 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     private void searchMemByCreditBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchMemByCreditBtnActionPerformed
     {//GEN-HEADEREND:event_searchMemByCreditBtnActionPerformed
         // TODO add your handling code here:
+        int index = creditKindCombo.getSelectedIndex();
+        String gs = "";
+        if(index == 0){
+            gs = ">=";
+        }else if(index == 1){
+            gs = "<=";
+        }
+        String credit = availableCreditField.getText();
+        String sql = "SELECT * FROM Membership where tier_credits " + gs + credit;
+        guiUtility.displayTable(membershipTable, sql, dtmMembership);
     }//GEN-LAST:event_searchMemByCreditBtnActionPerformed
 
     private void roomDeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomDeleteBtnActionPerformed
@@ -2157,8 +2161,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 int roomId = guiUtility.getSelectedRowId(roomTable);
                 reposity.deleteRoom(roomId);
                 // show delete successfully
-                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
                 showAllRoomBtnActionPerformed(evt);
+                JOptionPane.showMessageDialog(this, "✔ Delete successfully");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Select a room first", "Delete room error",
@@ -2194,7 +2198,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
 
     private void showAllUnpaidBooking(){
         String showUnpaidBookingSql = "SELECT b.booking_id,"
-                + "  cus.first_name"
+                + "  cus.cus_num || '-' ||cus.first_name"
                 + "  || ' '"
                 + "  || cus.last_name,"
                 + "  b.rm_num,"
@@ -2215,7 +2219,14 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
     }
     
     private void showAllPayment(){
-        String sql = "SELECT p.pay_id,b.booking_id,p.pay_date, p.pay_amount,p.pay_method FROM PAYMENT p LEFT JOIN Booking b on b.pay_id = p.pay_id";
+        // updated 
+        String sql = "SELECT p.pay_id,b.booking_id,"
+                + " cus.cus_num || '-' ||cus.first_name"
+                + "  || ' '"
+                + "  || cus.last_name,"
+                + " p.pay_date, p.pay_amount,p.pay_method FROM PAYMENT p "
+                + " LEFT JOIN Booking b on b.pay_id = p.pay_id "
+                + " LEFT JOIN customer cus on cus.cus_num = b.cus_num";
          guiUtility.displayTable(paymentTable, sql, dtmPayment);
     }
     
@@ -2247,8 +2258,8 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         String checkOutStr = dateFormatter.format(checkoutDate);
         
         String sql = "select distinct rm.rm_num,hotel.ht_name,rm.rm_type,rm_price from room rm "
-                + " left join booking_room br on br.rm_num = rm.rm_num "
-                + " left join booking b on b.booking_id = br.booking_id "
+//                + " left join booking_room br on br.rm_num = rm.rm_num "
+//                + " left join booking b on b.booking_id = br.booking_id "
                 + " left join hotel@FIT5148A hotel on hotel.ht_id = rm.ht_id "
                 + " where "
                 //  room type
@@ -2258,10 +2269,18 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 // room occupancy
                 + getRoomOccupancySql(roomOccupancy)
                 // checkin and checkout restrict
-                + " and to_date('"+checkInStr+"','YYYY-MM-DD') not between b.checkin_date and b.checkout_date"
-                + " and to_date('"+checkOutStr+"','YYYY-MM-DD') not between b.checkin_date and b.checkout_date" 
-                + " and b.checkin_date not between to_date('"+checkInStr+"','YYYY-MM-DD') and to_date('"+checkOutStr+"','YYYY-MM-DD')" 
-                + " and b.checkout_date not between to_date('"+checkInStr+"','YYYY-MM-DD') and to_date('"+checkOutStr+"','YYYY-MM-DD')";
+//                + " and to_date('"+checkInStr+"','YYYY-MM-DD') not between b.checkin_date and b.checkout_date"
+//                + " and to_date('"+checkOutStr+"','YYYY-MM-DD') not between b.checkin_date and b.checkout_date" 
+//                + " and b.checkin_date not between to_date('"+checkInStr+"','YYYY-MM-DD') and to_date('"+checkOutStr+"','YYYY-MM-DD')" 
+//                + " and b.checkout_date not between to_date('"+checkInStr+"','YYYY-MM-DD') and to_date('"+checkOutStr+"','YYYY-MM-DD')";
+                + " and NOT EXISTS" +
+                "  (SELECT 1" +
+                "  FROM Booking b" +
+                "  WHERE b.rm_num = rm.rm_num" +
+                "  AND ( to_date('"+ checkInStr +"','YYYY-MM-DD') BETWEEN b.checkin_date AND b.checkout_date " +
+                "  OR to_date('"+ checkOutStr +"','YYYY-MM-DD') BETWEEN b.checkin_date AND b.checkout_date " +
+                "  OR (to_date('"+ checkInStr +"','YYYY-MM-DD')  <= b.checkin_date " +
+                "  AND to_date('"+ checkOutStr +"','YYYY-MM-DD') >= b.checkout_date )))";
         
         
         guiUtility.displayTable(availableRoomTable, sql, dtmAvailableRoom);
@@ -2299,7 +2318,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         reposity.addBooking(book);
         JOptionPane.showMessageDialog(this, "Booking successfully");
         showAllBookingBtnActionPerformed(evt);
-
+        guiUtility.clearTable(availableRoomTable);
 
     }//GEN-LAST:event_bookBtnActionPerformed
 
@@ -2333,6 +2352,7 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             guiUtility.displayTable(chooseGuestTable, sql, dtmChooseGuest);
             int diffDays = (int) ((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
             price = diffDays * availableRoom.getRm_price();
+            
         }
     }//GEN-LAST:event_availableRoomTableMousePressed
 
@@ -2423,8 +2443,12 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
             int selectedRowIndex = unpaidBookingTable.getSelectedRow();
             String bookingId = unpaidBookingTable.getValueAt(selectedRowIndex, 0).toString();
             String totalAmount  = unpaidBookingTable.getValueAt(selectedRowIndex, 7).toString();
+            String customerString  = unpaidBookingTable.getValueAt(selectedRowIndex, 1).toString();
             //default method
             reposity.addPayment(Integer.parseInt(bookingId), Double.parseDouble(totalAmount), "Paypal");
+            int cstNum = Integer.parseInt(customerString.split("-")[0]);
+            Customer customer =  reposity.getCustomerById(cstNum);
+            updateCustomerMemTier(customer);
             // show delete successfully
             JOptionPane.showMessageDialog(this, "✔ Paid successfully");
             showAllUnpaidBooking();
@@ -2435,6 +2459,21 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
         }
     }//GEN-LAST:event_payBtnActionPerformed
 
+    /***
+     * Update customer membership tier based on their credits
+     * @param customer 
+     */
+    private void updateCustomerMemTier(Customer customer){
+        int credit = customer.getCredit();
+        for(Membership ms: reposity.getMs()){
+            if(credit >= ms.getTier_credit()){
+                customer.setMs(ms);
+                reposity.updateCustomer(customer);
+                return;
+            }
+        }
+    }
+    
     private void deletePaymentBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deletePaymentBtnActionPerformed
     {//GEN-HEADEREND:event_deletePaymentBtnActionPerformed
         if (guiUtility.isRowSelected(paymentTable)) {
@@ -2443,7 +2482,14 @@ public class HotelManageGUI extends javax.swing.JFrame implements ListSelectionL
                 int selectedRowIndex = paymentTable.getSelectedRow();
                 String payId = paymentTable.getValueAt(selectedRowIndex, 0).toString();
                 String bookingId  = paymentTable.getValueAt(selectedRowIndex, 1).toString();
+                String customerString  = paymentTable.getValueAt(selectedRowIndex, 2).toString();
+                String totalAmount  = paymentTable.getValueAt(selectedRowIndex, 4).toString();
                 reposity.cancelPayment(Integer.parseInt(payId),Integer.parseInt(bookingId));
+                
+                int cstNum = Integer.parseInt(customerString.split("-")[0]);
+                Customer customer =  reposity.getCustomerById(cstNum);
+//                customer.setCredit(customer.getCredit() - Integer.parseInt(totalAmount));
+                updateCustomerMemTier(customer);
                 // show delete successfully
                 JOptionPane.showMessageDialog(this, "✔ Delete successfully");
                 showAllPayment();

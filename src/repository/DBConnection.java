@@ -20,7 +20,7 @@ public final class DBConnection {
     public static Connection getConnectionA(){
         try {
             DriverManager.registerDriver(new OracleDriver());
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@hippo.its.monash.edu.au:1521:FIT5148a", "S27157326", "student");
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@hippo.its.monash.edu.au:1521:FIT5148a", "S27118347", "student");
             System.out.println("Connected to FIT5148A Database");
         } catch (SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
@@ -31,7 +31,7 @@ public final class DBConnection {
     public static Connection getConnectionB(){
         try {
             DriverManager.registerDriver(new OracleDriver());
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@hippo.its.monash.edu.au:1521:FIT5148b", "S27157326", "student");
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@hippo.its.monash.edu.au:1521:FIT5148b", "S27118347", "student");
             System.out.println("Connected to FIT5148B Database");
         } catch (SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
